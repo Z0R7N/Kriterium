@@ -1,2 +1,2 @@
 # Kriterium
- receiving readings from the com port and calculating the coefficient
+ taking readings from the com port and calculating the transformation ratio
