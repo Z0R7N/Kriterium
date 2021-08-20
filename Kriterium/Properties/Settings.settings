@@ -3,25 +3,25 @@
   <Profiles />
   <Settings>
     <Setting Name="port1" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">no</Value>
     </Setting>
     <Setting Name="port2" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">no</Value>
     </Setting>
     <Setting Name="minValue" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">0.401</Value>
     </Setting>
     <Setting Name="maxValue" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">0.436</Value>
     </Setting>
     <Setting Name="normValue" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">0.417</Value>
     </Setting>
     <Setting Name="volt1" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">0.5</Value>
     </Setting>
     <Setting Name="volt2" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">0.5</Value>
     </Setting>
   </Settings>
 </SettingsFile>

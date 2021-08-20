@@ -33,39 +33,39 @@ namespace Kriterium
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.serialPort1 = new System.IO.Ports.SerialPort(this.components);
             this.cbPort1 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnStop = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
             this.cbPort2 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tbVolt1 = new System.Windows.Forms.TextBox();
+            this.tbVolt2 = new System.Windows.Forms.TextBox();
+            this.tbMin = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.tbNorm = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.tbMax = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
+            this.pbRight = new System.Windows.Forms.ProgressBar();
+            this.pbLeft = new System.Windows.Forms.ProgressBar();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lblPort1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.lblKoeff = new System.Windows.Forms.Label();
+            this.lblPort2 = new System.Windows.Forms.Label();
+            this.tbMinPak = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.tbMaxPak = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -81,18 +81,18 @@ namespace Kriterium
             this.cbPort1.Size = new System.Drawing.Size(155, 33);
             this.cbPort1.TabIndex = 8;
             // 
-            // button1
+            // btnStop
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button1.BackColor = System.Drawing.Color.MistyRose;
-            this.button1.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(795, 41);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(115, 53);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "Стоп";
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnStop.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnStop.BackColor = System.Drawing.Color.MistyRose;
+            this.btnStop.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnStop.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnStop.Location = new System.Drawing.Point(795, 41);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(115, 53);
+            this.btnStop.TabIndex = 11;
+            this.btnStop.Text = "Стоп";
+            this.btnStop.UseVisualStyleBackColor = false;
             // 
             // label3
             // 
@@ -105,17 +105,17 @@ namespace Kriterium
             this.label3.TabIndex = 6;
             this.label3.Text = "Прибор 1:";
             // 
-            // button2
+            // btnStart
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(663, 41);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 53);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Пуск";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnStart.Location = new System.Drawing.Point(663, 41);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(115, 53);
+            this.btnStart.TabIndex = 10;
+            this.btnStart.Text = "Пуск";
+            this.btnStart.UseVisualStyleBackColor = false;
             // 
             // cbPort2
             // 
@@ -171,32 +171,32 @@ namespace Kriterium
             this.label5.TabIndex = 14;
             this.label5.Text = "прибор 2";
             // 
-            // textBox1
+            // tbVolt1
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(389, 134);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 31);
-            this.textBox1.TabIndex = 15;
+            this.tbVolt1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbVolt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbVolt1.Location = new System.Drawing.Point(389, 134);
+            this.tbVolt1.Name = "tbVolt1";
+            this.tbVolt1.Size = new System.Drawing.Size(100, 31);
+            this.tbVolt1.TabIndex = 15;
             // 
-            // textBox2
+            // tbVolt2
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(674, 134);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(99, 31);
-            this.textBox2.TabIndex = 16;
+            this.tbVolt2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbVolt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbVolt2.Location = new System.Drawing.Point(674, 134);
+            this.tbVolt2.Name = "tbVolt2";
+            this.tbVolt2.Size = new System.Drawing.Size(99, 31);
+            this.tbVolt2.TabIndex = 16;
             // 
-            // textBox3
+            // tbMin
             // 
-            this.textBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(197, 250);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(124, 31);
-            this.textBox3.TabIndex = 17;
+            this.tbMin.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMin.Location = new System.Drawing.Point(197, 250);
+            this.tbMin.Name = "tbMin";
+            this.tbMin.Size = new System.Drawing.Size(124, 31);
+            this.tbMin.TabIndex = 17;
             // 
             // label6
             // 
@@ -209,14 +209,14 @@ namespace Kriterium
             this.label6.TabIndex = 18;
             this.label6.Text = "номинал";
             // 
-            // textBox4
+            // tbNorm
             // 
-            this.textBox4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(463, 250);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(127, 31);
-            this.textBox4.TabIndex = 19;
+            this.tbNorm.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbNorm.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbNorm.Location = new System.Drawing.Point(463, 250);
+            this.tbNorm.Name = "tbNorm";
+            this.tbNorm.Size = new System.Drawing.Size(127, 31);
+            this.tbNorm.TabIndex = 19;
             // 
             // label7
             // 
@@ -229,14 +229,14 @@ namespace Kriterium
             this.label7.TabIndex = 20;
             this.label7.Text = "максимальное";
             // 
-            // textBox5
+            // tbMax
             // 
-            this.textBox5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox5.Location = new System.Drawing.Point(773, 250);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(137, 31);
-            this.textBox5.TabIndex = 21;
+            this.tbMax.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMax.Location = new System.Drawing.Point(773, 250);
+            this.tbMax.Name = "tbMax";
+            this.tbMax.Size = new System.Drawing.Size(137, 31);
+            this.tbMax.TabIndex = 21;
             // 
             // label8
             // 
@@ -249,28 +249,27 @@ namespace Kriterium
             this.label8.TabIndex = 22;
             this.label8.Text = "Значения замеров:   (прибор 2 делить на  прибор 1)";
             // 
-            // progressBar1
+            // pbRight
             // 
-            this.progressBar1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.progressBar1.Location = new System.Drawing.Point(486, 325);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(397, 23);
-            this.progressBar1.Step = 1;
-            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar1.TabIndex = 23;
+            this.pbRight.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pbRight.Location = new System.Drawing.Point(486, 325);
+            this.pbRight.Name = "pbRight";
+            this.pbRight.Size = new System.Drawing.Size(397, 23);
+            this.pbRight.Step = 1;
+            this.pbRight.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pbRight.TabIndex = 23;
             // 
-            // progressBar2
+            // pbLeft
             // 
-            this.progressBar2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.progressBar2.Location = new System.Drawing.Point(92, 325);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.progressBar2.RightToLeftLayout = true;
-            this.progressBar2.Size = new System.Drawing.Size(397, 23);
-            this.progressBar2.Step = 1;
-            this.progressBar2.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            this.progressBar2.TabIndex = 24;
-            this.progressBar2.Value = 10;
+            this.pbLeft.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pbLeft.Location = new System.Drawing.Point(92, 325);
+            this.pbLeft.Name = "pbLeft";
+            this.pbLeft.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.pbLeft.RightToLeftLayout = true;
+            this.pbLeft.Size = new System.Drawing.Size(397, 23);
+            this.pbLeft.Step = 1;
+            this.pbLeft.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.pbLeft.TabIndex = 24;
             // 
             // pictureBox1
             // 
@@ -305,16 +304,16 @@ namespace Kriterium
             this.pictureBox3.TabIndex = 27;
             this.pictureBox3.TabStop = false;
             // 
-            // label9
+            // lblPort1
             // 
-            this.label9.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(66, 448);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(206, 55);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "4,50266";
+            this.lblPort1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblPort1.AutoSize = true;
+            this.lblPort1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPort1.Location = new System.Drawing.Point(76, 448);
+            this.lblPort1.Name = "lblPort1";
+            this.lblPort1.Size = new System.Drawing.Size(178, 55);
+            this.lblPort1.TabIndex = 28;
+            this.lblPort1.Text = "0,0000";
             // 
             // label10
             // 
@@ -349,43 +348,43 @@ namespace Kriterium
             this.label12.TabIndex = 31;
             this.label12.Text = "коэффициент";
             // 
-            // label13
+            // lblKoeff
             // 
-            this.label13.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(321, 435);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(332, 91);
-            this.label13.TabIndex = 32;
-            this.label13.Text = "4,50266";
+            this.lblKoeff.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblKoeff.AutoSize = true;
+            this.lblKoeff.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblKoeff.Location = new System.Drawing.Point(342, 435);
+            this.lblKoeff.Name = "lblKoeff";
+            this.lblKoeff.Size = new System.Drawing.Size(287, 91);
+            this.lblKoeff.TabIndex = 32;
+            this.lblKoeff.Text = "0,0000";
             // 
-            // label14
+            // lblPort2
             // 
-            this.label14.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label14.Location = new System.Drawing.Point(704, 448);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(206, 55);
-            this.label14.TabIndex = 33;
-            this.label14.Text = "4,50266";
+            this.lblPort2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblPort2.AutoSize = true;
+            this.lblPort2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblPort2.Location = new System.Drawing.Point(716, 448);
+            this.lblPort2.Name = "lblPort2";
+            this.lblPort2.Size = new System.Drawing.Size(178, 55);
+            this.lblPort2.TabIndex = 33;
+            this.lblPort2.Text = "0,0000";
             // 
-            // textBox6
+            // tbMinPak
             // 
-            this.textBox6.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox6.Location = new System.Drawing.Point(124, 611);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(263, 29);
-            this.textBox6.TabIndex = 34;
+            this.tbMinPak.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbMinPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMinPak.Location = new System.Drawing.Point(124, 593);
+            this.tbMinPak.Name = "tbMinPak";
+            this.tbMinPak.Size = new System.Drawing.Size(263, 29);
+            this.tbMinPak.TabIndex = 34;
             // 
             // label15
             // 
             this.label15.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label15.Location = new System.Drawing.Point(87, 570);
+            this.label15.Location = new System.Drawing.Point(87, 552);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(342, 25);
             this.label15.TabIndex = 37;
@@ -396,7 +395,7 @@ namespace Kriterium
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(519, 570);
+            this.label16.Location = new System.Drawing.Point(519, 552);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(352, 25);
             this.label16.TabIndex = 38;
@@ -424,54 +423,54 @@ namespace Kriterium
             this.label18.TabIndex = 40;
             this.label18.Text = "V";
             // 
-            // textBox7
+            // tbMaxPak
             // 
-            this.textBox7.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.textBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox7.Location = new System.Drawing.Point(571, 611);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(263, 29);
-            this.textBox7.TabIndex = 41;
+            this.tbMaxPak.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.tbMaxPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMaxPak.Location = new System.Drawing.Point(571, 593);
+            this.tbMaxPak.Name = "tbMaxPak";
+            this.tbMaxPak.Size = new System.Drawing.Size(263, 29);
+            this.tbMaxPak.TabIndex = 41;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(984, 661);
-            this.Controls.Add(this.textBox7);
+            this.Controls.Add(this.tbMaxPak);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
+            this.Controls.Add(this.tbMinPak);
+            this.Controls.Add(this.lblPort2);
+            this.Controls.Add(this.lblKoeff);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
+            this.Controls.Add(this.lblPort1);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.progressBar2);
-            this.Controls.Add(this.progressBar1);
+            this.Controls.Add(this.pbLeft);
+            this.Controls.Add(this.pbRight);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.tbMax);
             this.Controls.Add(this.label7);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.tbNorm);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tbMin);
+            this.Controls.Add(this.tbVolt2);
+            this.Controls.Add(this.tbVolt1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbPort1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnStop);
             this.Controls.Add(this.cbPort2);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnStart);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -479,6 +478,7 @@ namespace Kriterium
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Kriterium";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -491,39 +491,39 @@ namespace Kriterium
         #endregion
         private System.IO.Ports.SerialPort serialPort1;
         private System.Windows.Forms.ComboBox cbPort1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnStop;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.ComboBox cbPort2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tbVolt1;
+        private System.Windows.Forms.TextBox tbVolt2;
+        private System.Windows.Forms.TextBox tbMin;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox tbNorm;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.TextBox tbMax;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ProgressBar progressBar2;
+        private System.Windows.Forms.ProgressBar pbRight;
+        private System.Windows.Forms.ProgressBar pbLeft;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblPort1;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label lblKoeff;
+        private System.Windows.Forms.Label lblPort2;
+        private System.Windows.Forms.TextBox tbMinPak;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox tbMaxPak;
     }
 }
 

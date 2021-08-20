@@ -25,7 +25,7 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("no")]
         public string port1 {
             get {
                 return ((string)(this["port1"]));
@@ -37,7 +37,7 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("no")]
         public string port2 {
             get {
                 return ((string)(this["port2"]));
@@ -49,7 +49,7 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.401")]
         public double minValue {
             get {
                 return ((double)(this["minValue"]));
@@ -61,7 +61,7 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.436")]
         public double maxValue {
             get {
                 return ((double)(this["maxValue"]));
@@ -73,7 +73,7 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.417")]
         public double normValue {
             get {
                 return ((double)(this["normValue"]));
@@ -85,7 +85,7 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
         public double volt1 {
             get {
                 return ((double)(this["volt1"]));
@@ -97,7 +97,7 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
         public double volt2 {
             get {
                 return ((double)(this["volt2"]));
