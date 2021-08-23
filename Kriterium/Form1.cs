@@ -54,11 +54,13 @@ namespace Kriterium
             tbNorm.Text = normVal.ToString();
         }
 
+
+
         private void btnStart_Click(object sender, EventArgs e)
         {
             Console.Write(cbPort1.Text + "  ");
             Console.WriteLine(cbPort2.Text);
-            if (false) //(cbPort1.Text == cbPort2.Text)  < -=============================================== включить
+            if (cbPort1.Text == cbPort2.Text)
             {
                 MessageBox.Show("Порты приборов должны быть разными", "Сообщение", MessageBoxButtons.OK,
         MessageBoxIcon.Information, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
@@ -70,11 +72,11 @@ namespace Kriterium
                 try
                 {
                     serialPort1.PortName = cbPort1.Text;
-                    //serialPort2.PortName = cbPort2.Text;   <----------------------------------------------------------  включить
+                    serialPort2.PortName = cbPort2.Text;
                     serialPort1.BaudRate = 9600;
-                    //serialPort2.BaudRate = 9600;
+                    serialPort2.BaudRate = 9600;
                     serialPort1.Open();
-                    //serialPort2.Open();
+                    serialPort2.Open();
 
                     setup();
                 }
@@ -89,12 +91,21 @@ namespace Kriterium
         private void btnStop_Click(object sender, EventArgs e)
         {
             Console.WriteLine("button  stop  click");
-            closePorts();
-            while (!serialPort1.IsOpen)// && !serialPort2.IsOpen) < _-----------------------------------_
+            string exist = "check";
+            while (exist.Length != 0 && !serialPort1.IsOpen)
             {
-                serialPort1.ReadExisting();
-                Thread.Sleep(20);
+                Thread.Sleep(500);
+                exist = serialPort1.ReadExisting();
+                Console.WriteLine(exist);
             }
+            exist = "check";
+            while (exist.Length != 0 && !serialPort2.IsOpen)
+            {
+                Thread.Sleep(500);
+                exist = serialPort2.ReadExisting();
+                Console.WriteLine(exist);
+            }
+            closePorts();
             unBlockElements();
             lblKoeff.Text = "0,0000";
             lblPort1.Text = "0,0000";
@@ -220,23 +231,37 @@ namespace Kriterium
         // when the application is closed
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            string exist = "check";
+            while (exist.Length != 0 && serialPort1.IsOpen) 
+            {
+                Thread.Sleep(500);
+                exist = serialPort1.ReadExisting();
+                Console.WriteLine(exist);
+            }
+            exist = "check";
+            while (exist.Length != 0 && serialPort2.IsOpen)
+            {
+                Thread.Sleep(500);
+                exist = serialPort2.ReadExisting();
+                Console.WriteLine(exist);
+            }
             closePorts();
         }
 
         private void cbVolt1_CheckedChanged(object sender, EventArgs e)
         {
-            bool cb = cbVolt1.Checked;
-            cbVolt1.Text = cb ? "0,5V" : "5V";
+            voltage1 = cbVolt1.Checked;
+            cbVolt1.Text = voltage1 ? "0,5V" : "5V";
             v1 = voltage1 ? 0.5 : 5;
-            saveBool(cb, "volt1");
+            saveBool(voltage1, "volt1");
         }
 
         private void cbVolt2_CheckedChanged(object sender, EventArgs e)
         {
-            bool cb = cbVolt2.Checked;
-            cbVolt2.Text = cb ? "0,5V" : "5V";
+            voltage2 = cbVolt2.Checked;
+            cbVolt2.Text = voltage2 ? "0,5V" : "5V";
             v2 = voltage2 ? 0.5 : 5;
-            saveBool(cb, "volt2");
+            saveBool(voltage2, "volt2");
         }
 
         // method manage of process
@@ -244,12 +269,12 @@ namespace Kriterium
         {
             try
             {
-                while (!serialPort1.IsOpen)// && !serialPort2.IsOpen) < _-----------------------------------_
+                while (!serialPort1.IsOpen && !serialPort2.IsOpen)
                 {
                     Thread.Sleep(100);
                 }
                 serialPort1.WriteLine("CONF:VOLT:AC " + v1);
-                //serialPort2.WriteLine("CONF:VOLT:AC " + v2);
+                serialPort2.WriteLine("CONF:VOLT:AC " + v2);
                 Thread lp = new Thread(loop);
                 lp.Start();
             }
@@ -268,12 +293,12 @@ namespace Kriterium
                 try
                 {
                     serialPort1.WriteLine("MEAS:VOLT:AC? " + v1);
-                    //serialPort2.WriteLine("MEAS:VOLT:AC? " + v2);
+                    serialPort2.WriteLine("MEAS:VOLT:AC? " + v2);
                 }
                 catch (Exception)
                 {
 
-                    // throw;
+                    throw;
                 }
                 //Thread.Sleep(500);
                 
@@ -282,9 +307,9 @@ namespace Kriterium
                     p1 = serialPort1.ReadLine();
                     dPort1 = convertToDouble(p1);
                     p1 = dPort1.ToString();
-                    //p2 = serialPort2.ReadLine();
-                    //dPort2 = convertToDouble(p2);
-                    //p2 = dPort2.ToString();
+                    p2 = serialPort2.ReadLine();
+                    dPort2 = convertToDouble(p2);
+                    p2 = dPort2.ToString();
                 }
                 catch (Exception)
                 {
@@ -300,7 +325,7 @@ namespace Kriterium
                 {
                     lblPort2.Text = p2;
                 }));
-                string kt = calcCoefficient(dPort1);//, p2);   <<============================================
+                string kt = calcCoefficient(dPort1, dPort2);
                 this.Invoke(new Action(() =>
                 {
                     lblKoeff.Text = kt;
@@ -316,11 +341,12 @@ namespace Kriterium
             double res = 0;
             data = Regex.Replace(data, @"\.", ",");
             Double.TryParse(data, out res);
+            res /= 10;
             return res;
         }
 
         // calculating coefficient
-        private string calcCoefficient(double d1, double d2 = +4.203E-1) // <<-----------------------------------------
+        private string calcCoefficient(double d1, double d2)
         {
             string res = "ERROR";
             double ans = d2 / d1;
@@ -358,16 +384,5 @@ namespace Kriterium
                 }));
             }
         }
-
-        // method for timer
-        //private bool timerLimit(int timer)
-        //{
-        //    if (millis() - *time > timer)
-        //    {
-        //        *time = millis();
-        //        return true;
-        //    }
-        //    return false;
-        //}
     }
 }
