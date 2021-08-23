@@ -17,11 +17,11 @@
     <Setting Name="normValue" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0.417</Value>
     </Setting>
-    <Setting Name="volt1" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.5</Value>
+    <Setting Name="volt1" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="volt2" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0.5</Value>
+    <Setting Name="volt2" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

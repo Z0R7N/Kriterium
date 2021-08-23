@@ -41,8 +41,6 @@ namespace Kriterium
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.tbVolt1 = new System.Windows.Forms.TextBox();
-            this.tbVolt2 = new System.Windows.Forms.TextBox();
             this.tbMin = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.tbNorm = new System.Windows.Forms.TextBox();
@@ -60,14 +58,14 @@ namespace Kriterium
             this.tbMinPak = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
             this.tbMaxPak = new System.Windows.Forms.TextBox();
             this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
             this.btnChange = new System.Windows.Forms.Button();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.cbVolt1 = new System.Windows.Forms.CheckBox();
+            this.cbVolt2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -176,26 +174,6 @@ namespace Kriterium
             this.label5.Size = new System.Drawing.Size(102, 25);
             this.label5.TabIndex = 14;
             this.label5.Text = "прибор 2";
-            // 
-            // tbVolt1
-            // 
-            this.tbVolt1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbVolt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbVolt1.Location = new System.Drawing.Point(389, 134);
-            this.tbVolt1.Name = "tbVolt1";
-            this.tbVolt1.Size = new System.Drawing.Size(100, 31);
-            this.tbVolt1.TabIndex = 15;
-            this.tbVolt1.TextChanged += new System.EventHandler(this.tbVolt1_TextChanged);
-            // 
-            // tbVolt2
-            // 
-            this.tbVolt2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbVolt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbVolt2.Location = new System.Drawing.Point(674, 134);
-            this.tbVolt2.Name = "tbVolt2";
-            this.tbVolt2.Size = new System.Drawing.Size(99, 31);
-            this.tbVolt2.TabIndex = 16;
-            this.tbVolt2.TextChanged += new System.EventHandler(this.tbVolt2_TextChanged);
             // 
             // tbMin
             // 
@@ -380,28 +358,6 @@ namespace Kriterium
             this.label16.TabIndex = 38;
             this.label16.Text = "максимальное значение в партии";
             // 
-            // label17
-            // 
-            this.label17.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label17.Location = new System.Drawing.Point(495, 137);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(26, 25);
-            this.label17.TabIndex = 39;
-            this.label17.Text = "V";
-            // 
-            // label18
-            // 
-            this.label18.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label18.Location = new System.Drawing.Point(780, 137);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(26, 25);
-            this.label18.TabIndex = 40;
-            this.label18.Text = "V";
-            // 
             // tbMaxPak
             // 
             this.tbMaxPak.Anchor = System.Windows.Forms.AnchorStyles.Top;
@@ -465,6 +421,32 @@ namespace Kriterium
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
+            // cbVolt1
+            // 
+            this.cbVolt1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbVolt1.AutoSize = true;
+            this.cbVolt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbVolt1.Location = new System.Drawing.Point(388, 136);
+            this.cbVolt1.Name = "cbVolt1";
+            this.cbVolt1.Size = new System.Drawing.Size(81, 29);
+            this.cbVolt1.TabIndex = 43;
+            this.cbVolt1.Text = "0,5 V";
+            this.cbVolt1.UseVisualStyleBackColor = true;
+            this.cbVolt1.CheckedChanged += new System.EventHandler(this.cbVolt1_CheckedChanged);
+            // 
+            // cbVolt2
+            // 
+            this.cbVolt2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbVolt2.AutoSize = true;
+            this.cbVolt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbVolt2.Location = new System.Drawing.Point(674, 136);
+            this.cbVolt2.Name = "cbVolt2";
+            this.cbVolt2.Size = new System.Drawing.Size(81, 29);
+            this.cbVolt2.TabIndex = 44;
+            this.cbVolt2.Text = "0,5 V";
+            this.cbVolt2.UseVisualStyleBackColor = true;
+            this.cbVolt2.CheckedChanged += new System.EventHandler(this.cbVolt2_CheckedChanged);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnStart;
@@ -472,10 +454,10 @@ namespace Kriterium
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnStop;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.cbVolt2);
+            this.Controls.Add(this.cbVolt1);
             this.Controls.Add(this.btnChange);
             this.Controls.Add(this.tbMaxPak);
-            this.Controls.Add(this.label18);
-            this.Controls.Add(this.label17);
             this.Controls.Add(this.label16);
             this.Controls.Add(this.label15);
             this.Controls.Add(this.tbMinPak);
@@ -496,8 +478,6 @@ namespace Kriterium
             this.Controls.Add(this.tbNorm);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.tbMin);
-            this.Controls.Add(this.tbVolt2);
-            this.Controls.Add(this.tbVolt1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -535,8 +515,6 @@ namespace Kriterium
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbVolt1;
-        private System.Windows.Forms.TextBox tbVolt2;
         private System.Windows.Forms.TextBox tbMin;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbNorm;
@@ -557,11 +535,11 @@ namespace Kriterium
         private System.Windows.Forms.TextBox tbMinPak;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox tbMaxPak;
         private System.IO.Ports.SerialPort serialPort2;
         private System.Windows.Forms.Button btnChange;
+        private System.Windows.Forms.CheckBox cbVolt1;
+        private System.Windows.Forms.CheckBox cbVolt2;
     }
 }
 

@@ -10,10 +10,14 @@ namespace Kriterium
     public partial class Form1 : Form
     {
         string[] ports;
-        double voltage1, voltage2;            // voltage range
+        bool voltage1, voltage2;              // voltage range - true = 0.5V,  false = 5V
         double maxVal, minVal, normVal;       // value for calculating
         double lowValue, highValue;           // value for lowest and highest value of calculating
         bool work = false;                    // flag for click buttons start and stop
+        double v1, v2;                        // volts set for devices
+        string p1 = "";                       // volt string from devices
+        string p2 = "";                 
+        double dPort1, dPort2;                // double from p1 and p2
 
         public Form1()
         {
@@ -33,10 +37,14 @@ namespace Kriterium
             cbPort1.SelectedIndex = prt1;
             cbPort2.SelectedIndex = prt2;
 
-            voltage1 = (double)Settings.Default["volt1"];
-            voltage2 = (double)Settings.Default["volt2"];
-            tbVolt1.Text = voltage1.ToString();
-            tbVolt2.Text = voltage2.ToString();
+            voltage1 = (bool)Settings.Default["volt1"];
+            voltage2 = (bool)Settings.Default["volt2"];
+            cbVolt1.Checked = voltage1;
+            cbVolt1.Text = voltage1 ? "0,5V" : "5V";
+            cbVolt2.Checked = voltage2;
+            cbVolt2.Text = voltage2 ? "0,5V" : "5V";
+            v1 = voltage1 ? 0.5 : 5;
+            v2 = voltage2 ? 0.5 : 5;
 
             maxVal = (double)Settings.Default["maxValue"];
             minVal = (double)Settings.Default["minValue"];
@@ -80,8 +88,13 @@ namespace Kriterium
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            closePorts();
             Console.WriteLine("button  stop  click");
+            closePorts();
+            while (!serialPort1.IsOpen)// && !serialPort2.IsOpen) < _-----------------------------------_
+            {
+                serialPort1.ReadExisting();
+                Thread.Sleep(20);
+            }
             unBlockElements();
             lblKoeff.Text = "0,0000";
             lblPort1.Text = "0,0000";
@@ -99,8 +112,8 @@ namespace Kriterium
             btnChange.Enabled = false;
             cbPort1.Enabled = false;
             cbPort2.Enabled = false;
-            tbVolt1.Enabled = false;
-            tbVolt2.Enabled = false;
+            cbVolt1.Enabled = false;
+            cbVolt2.Enabled = false;
             tbMin.Enabled = false;
             tbMax.Enabled = false;
             tbNorm.Enabled = false;
@@ -115,8 +128,8 @@ namespace Kriterium
             btnChange.Enabled = true;
             cbPort1.Enabled = true;
             cbPort2.Enabled = true;
-            tbVolt1.Enabled = true;
-            tbVolt2.Enabled = true;
+            cbVolt1.Enabled = true;
+            cbVolt2.Enabled = true;
             tbMin.Enabled = true;
             tbMax.Enabled = true;
             tbNorm.Enabled = true;
@@ -148,7 +161,6 @@ namespace Kriterium
 
         private void tbVolt2_TextChanged(object sender, EventArgs e)
         {
-            saveNumber(tbVolt2.Text, "volt2");
         }
 
         private void tbMin_TextChanged(object sender, EventArgs e)
@@ -166,11 +178,13 @@ namespace Kriterium
             saveNumber(tbMax.Text, "maxValue");
         }
 
-        private void tbVolt1_TextChanged(object sender, EventArgs e)
+        // save bool for voltage
+        private void saveBool(bool data, string sett)
         {
-            saveNumber(tbVolt1.Text, "volt1");
+            Settings.Default[sett] = data;
+            Settings.Default.Save();
         }
-
+        
         private void saveNumber(string data, string sett)
         {
             data = Regex.Replace(data, @"\.", ",");
@@ -209,6 +223,22 @@ namespace Kriterium
             closePorts();
         }
 
+        private void cbVolt1_CheckedChanged(object sender, EventArgs e)
+        {
+            bool cb = cbVolt1.Checked;
+            cbVolt1.Text = cb ? "0,5V" : "5V";
+            v1 = voltage1 ? 0.5 : 5;
+            saveBool(cb, "volt1");
+        }
+
+        private void cbVolt2_CheckedChanged(object sender, EventArgs e)
+        {
+            bool cb = cbVolt2.Checked;
+            cbVolt2.Text = cb ? "0,5V" : "5V";
+            v2 = voltage2 ? 0.5 : 5;
+            saveBool(cb, "volt2");
+        }
+
         // method manage of process
         private void setup()
         {
@@ -218,7 +248,8 @@ namespace Kriterium
                 {
                     Thread.Sleep(100);
                 }
-                //serialPort1.WriteLine("CONF:VOLT:AC " + voltage1 + Environment.NewLine);
+                serialPort1.WriteLine("CONF:VOLT:AC " + v1);
+                //serialPort2.WriteLine("CONF:VOLT:AC " + v2);
                 Thread lp = new Thread(loop);
                 lp.Start();
             }
@@ -236,8 +267,8 @@ namespace Kriterium
                 //timerLimit(500);
                 try
                 {
-                    serialPort1.WriteLine("MEAS:VOLT:AC?");
-                    //serialPort2.WriteLine("MEAS:VOLT:AC?");
+                    serialPort1.WriteLine("MEAS:VOLT:AC? " + v1);
+                    //serialPort2.WriteLine("MEAS:VOLT:AC? " + v2);
                 }
                 catch (Exception)
                 {
@@ -245,16 +276,15 @@ namespace Kriterium
                     // throw;
                 }
                 //Thread.Sleep(500);
-                string p1 = "";
-                string p2 = "";
+                
                 try
                 {
                     p1 = serialPort1.ReadLine();
-                    this.Invoke(new Action(() =>
-                    {
-                        tbMaxPak.Text = p1;
-                    }));
+                    dPort1 = convertToDouble(p1);
+                    p1 = dPort1.ToString();
                     //p2 = serialPort2.ReadLine();
+                    //dPort2 = convertToDouble(p2);
+                    //p2 = dPort2.ToString();
                 }
                 catch (Exception)
                 {
@@ -270,7 +300,7 @@ namespace Kriterium
                 {
                     lblPort2.Text = p2;
                 }));
-                string kt = calcCoefficient(p1);//, p2);   <<============================================
+                string kt = calcCoefficient(dPort1);//, p2);   <<============================================
                 this.Invoke(new Action(() =>
                 {
                     lblKoeff.Text = kt;
@@ -280,19 +310,22 @@ namespace Kriterium
             }
         }
 
+        // change string from +3.569E-1 to 0.3569
+        private double convertToDouble(string data)
+        {
+            double res = 0;
+            data = Regex.Replace(data, @"\.", ",");
+            Double.TryParse(data, out res);
+            return res;
+        }
+
         // calculating coefficient
-        private string calcCoefficient(string p1, string p2 = "0,420") // <<-----------------------------------------
+        private string calcCoefficient(double d1, double d2 = +4.203E-1) // <<-----------------------------------------
         {
             string res = "ERROR";
-            double num1, num2;
-            p1 = Regex.Replace(p1, @"\.", ",");
-            p2 = Regex.Replace(p2, @"\.", ",");
-            Double.TryParse(p1, out num1);
-            Double.TryParse(p2, out num2);
-            double ans = num2 / num1;
-            Console.WriteLine(ans);
+            double ans = d2 / d1;
             //res = string.Format("{0:0.####}", ans);
-            res = (num2 / num1).ToString("N4");
+            res = ans.ToString("N4");
             setProgressBar(ans);
             return res;
         }

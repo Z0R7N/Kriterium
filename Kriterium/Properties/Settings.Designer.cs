@@ -85,10 +85,10 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
-        public double volt1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool volt1 {
             get {
-                return ((double)(this["volt1"]));
+                return ((bool)(this["volt1"]));
             }
             set {
                 this["volt1"] = value;
@@ -97,10 +97,10 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
-        public double volt2 {
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool volt2 {
             get {
-                return ((double)(this["volt2"]));
+                return ((bool)(this["volt2"]));
             }
             set {
                 this["volt2"] = value;
