@@ -51,9 +51,6 @@ namespace Kriterium
             this.label8 = new System.Windows.Forms.Label();
             this.pbRight = new System.Windows.Forms.ProgressBar();
             this.pbLeft = new System.Windows.Forms.ProgressBar();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lblPort1 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -66,9 +63,14 @@ namespace Kriterium
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.tbMaxPak = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.serialPort2 = new System.IO.Ports.SerialPort(this.components);
+            this.btnChange = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cbPort1
@@ -80,6 +82,7 @@ namespace Kriterium
             this.cbPort1.Name = "cbPort1";
             this.cbPort1.Size = new System.Drawing.Size(155, 33);
             this.cbPort1.TabIndex = 8;
+            this.cbPort1.SelectedIndexChanged += new System.EventHandler(this.cbPort1_SelectedIndexChanged);
             // 
             // btnStop
             // 
@@ -93,6 +96,7 @@ namespace Kriterium
             this.btnStop.TabIndex = 11;
             this.btnStop.Text = "Стоп";
             this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
             // 
             // label3
             // 
@@ -110,29 +114,31 @@ namespace Kriterium
             this.btnStart.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnStart.Location = new System.Drawing.Point(663, 41);
+            this.btnStart.Location = new System.Drawing.Point(674, 41);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(115, 53);
             this.btnStart.TabIndex = 10;
             this.btnStart.Text = "Пуск";
             this.btnStart.UseVisualStyleBackColor = false;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // cbPort2
             // 
             this.cbPort2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.cbPort2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.cbPort2.FormattingEnabled = true;
-            this.cbPort2.Location = new System.Drawing.Point(475, 52);
+            this.cbPort2.Location = new System.Drawing.Point(500, 52);
             this.cbPort2.Name = "cbPort2";
             this.cbPort2.Size = new System.Drawing.Size(154, 33);
             this.cbPort2.TabIndex = 9;
+            this.cbPort2.SelectedIndexChanged += new System.EventHandler(this.cbPort2_SelectedIndexChanged);
             // 
             // label4
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(358, 55);
+            this.label4.Location = new System.Drawing.Point(383, 55);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(111, 25);
             this.label4.TabIndex = 7;
@@ -179,6 +185,7 @@ namespace Kriterium
             this.tbVolt1.Name = "tbVolt1";
             this.tbVolt1.Size = new System.Drawing.Size(100, 31);
             this.tbVolt1.TabIndex = 15;
+            this.tbVolt1.TextChanged += new System.EventHandler(this.tbVolt1_TextChanged);
             // 
             // tbVolt2
             // 
@@ -188,6 +195,7 @@ namespace Kriterium
             this.tbVolt2.Name = "tbVolt2";
             this.tbVolt2.Size = new System.Drawing.Size(99, 31);
             this.tbVolt2.TabIndex = 16;
+            this.tbVolt2.TextChanged += new System.EventHandler(this.tbVolt2_TextChanged);
             // 
             // tbMin
             // 
@@ -197,6 +205,7 @@ namespace Kriterium
             this.tbMin.Name = "tbMin";
             this.tbMin.Size = new System.Drawing.Size(124, 31);
             this.tbMin.TabIndex = 17;
+            this.tbMin.TextChanged += new System.EventHandler(this.tbMin_TextChanged);
             // 
             // label6
             // 
@@ -217,6 +226,7 @@ namespace Kriterium
             this.tbNorm.Name = "tbNorm";
             this.tbNorm.Size = new System.Drawing.Size(127, 31);
             this.tbNorm.TabIndex = 19;
+            this.tbNorm.TextChanged += new System.EventHandler(this.tbNorm_TextChanged);
             // 
             // label7
             // 
@@ -237,6 +247,7 @@ namespace Kriterium
             this.tbMax.Name = "tbMax";
             this.tbMax.Size = new System.Drawing.Size(137, 31);
             this.tbMax.TabIndex = 21;
+            this.tbMax.TextChanged += new System.EventHandler(this.tbMax_TextChanged);
             // 
             // label8
             // 
@@ -270,39 +281,6 @@ namespace Kriterium
             this.pbLeft.Step = 1;
             this.pbLeft.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.pbLeft.TabIndex = 24;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
-            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(268, 350);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(42, 34);
-            this.pictureBox1.TabIndex = 25;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.ErrorImage")));
-            this.pictureBox2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.InitialImage")));
-            this.pictureBox2.Location = new System.Drawing.Point(465, 350);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(42, 34);
-            this.pictureBox2.TabIndex = 26;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pictureBox3.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.ErrorImage")));
-            this.pictureBox3.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.InitialImage")));
-            this.pictureBox3.Location = new System.Drawing.Point(663, 350);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(42, 34);
-            this.pictureBox3.TabIndex = 27;
-            this.pictureBox3.TabStop = false;
             // 
             // lblPort1
             // 
@@ -373,10 +351,11 @@ namespace Kriterium
             // tbMinPak
             // 
             this.tbMinPak.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbMinPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMinPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbMinPak.Location = new System.Drawing.Point(124, 593);
             this.tbMinPak.Name = "tbMinPak";
-            this.tbMinPak.Size = new System.Drawing.Size(263, 29);
+            this.tbMinPak.ReadOnly = true;
+            this.tbMinPak.Size = new System.Drawing.Size(263, 31);
             this.tbMinPak.TabIndex = 34;
             // 
             // label15
@@ -426,17 +405,74 @@ namespace Kriterium
             // tbMaxPak
             // 
             this.tbMaxPak.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbMaxPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMaxPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbMaxPak.Location = new System.Drawing.Point(571, 593);
             this.tbMaxPak.Name = "tbMaxPak";
-            this.tbMaxPak.Size = new System.Drawing.Size(263, 29);
+            this.tbMaxPak.ReadOnly = true;
+            this.tbMaxPak.Size = new System.Drawing.Size(263, 31);
             this.tbMaxPak.TabIndex = 41;
+            // 
+            // btnChange
+            // 
+            this.btnChange.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnChange.BackColor = System.Drawing.SystemColors.InactiveBorder;
+            this.btnChange.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnChange.BackgroundImage")));
+            this.btnChange.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnChange.Location = new System.Drawing.Point(328, 52);
+            this.btnChange.Name = "btnChange";
+            this.btnChange.Size = new System.Drawing.Size(49, 33);
+            this.btnChange.TabIndex = 42;
+            this.btnChange.UseVisualStyleBackColor = false;
+            this.btnChange.Click += new System.EventHandler(this.btnChange_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox3.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.ErrorImage")));
+            this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
+            this.pictureBox3.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.InitialImage")));
+            this.pictureBox3.Location = new System.Drawing.Point(663, 350);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(43, 34);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox3.TabIndex = 27;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.ErrorImage")));
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.InitialImage")));
+            this.pictureBox2.Location = new System.Drawing.Point(465, 350);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(46, 34);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox2.TabIndex = 26;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
+            this.pictureBox1.Location = new System.Drawing.Point(268, 350);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(45, 34);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 25;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
+            this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnStop;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.btnChange);
             this.Controls.Add(this.tbMaxPak);
             this.Controls.Add(this.label18);
             this.Controls.Add(this.label17);
@@ -480,9 +516,9 @@ namespace Kriterium
             this.Text = "Kriterium";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -524,6 +560,8 @@ namespace Kriterium
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.TextBox tbMaxPak;
+        private System.IO.Ports.SerialPort serialPort2;
+        private System.Windows.Forms.Button btnChange;
     }
 }
 
