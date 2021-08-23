@@ -16,7 +16,7 @@ namespace Kriterium
         bool work = false;                    // flag for click buttons start and stop
         double v1, v2;                        // volts set for devices
         string p1 = "";                       // volt string from devices
-        string p2 = "";                 
+        string p2 = "";
         double dPort1, dPort2;                // double from p1 and p2
 
         public Form1()
@@ -24,6 +24,26 @@ namespace Kriterium
             InitializeComponent();
         }
 
+        // take arguments or settings
+        private void checkArguments()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+            if (args.Length > 1)
+            {
+                minVal = convertToDouble(args[1]);
+                normVal = convertToDouble(args[2]);
+                maxVal = convertToDouble(args[3]);
+            }
+            else
+            {
+                maxVal = (double)Settings.Default["maxValue"];
+                minVal = (double)Settings.Default["minValue"];
+                normVal = (double)Settings.Default["normValue"];
+            }
+            tbMax.Text = maxVal.ToString();
+            tbMin.Text = minVal.ToString();
+            tbNorm.Text = normVal.ToString();
+        }
 
         // when the app is started
         private void Form1_Load(object sender, EventArgs e)
@@ -46,12 +66,7 @@ namespace Kriterium
             v1 = voltage1 ? 0.5 : 5;
             v2 = voltage2 ? 0.5 : 5;
 
-            maxVal = (double)Settings.Default["maxValue"];
-            minVal = (double)Settings.Default["minValue"];
-            normVal = (double)Settings.Default["normValue"];
-            tbMax.Text = maxVal.ToString();
-            tbMin.Text = minVal.ToString();
-            tbNorm.Text = normVal.ToString();
+            checkArguments();
         }
 
 
@@ -195,7 +210,7 @@ namespace Kriterium
             Settings.Default[sett] = data;
             Settings.Default.Save();
         }
-        
+
         private void saveNumber(string data, string sett)
         {
             data = Regex.Replace(data, @"\.", ",");
@@ -232,7 +247,7 @@ namespace Kriterium
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             string exist = "check";
-            while (exist.Length != 0 && serialPort1.IsOpen) 
+            while (exist.Length != 0 && serialPort1.IsOpen)
             {
                 Thread.Sleep(500);
                 exist = serialPort1.ReadExisting();
@@ -301,7 +316,7 @@ namespace Kriterium
                     throw;
                 }
                 //Thread.Sleep(500);
-                
+
                 try
                 {
                     p1 = serialPort1.ReadLine();
@@ -341,7 +356,6 @@ namespace Kriterium
             double res = 0;
             data = Regex.Replace(data, @"\.", ",");
             Double.TryParse(data, out res);
-            res /= 10;
             return res;
         }
 
@@ -367,7 +381,7 @@ namespace Kriterium
                     pbRight.Value = 50;
                 }));
             }
-            else if(num < 1)
+            else if (num < 1)
             {
                 this.Invoke(new Action(() =>
                 {
