@@ -67,9 +67,6 @@ namespace Kriterium
             v2 = voltage2 ? 0.5 : 5;
 
             checkArguments();
-
-            Console.WriteLine("double convert = " + convertToDouble());  // << --------------------------------------delete
-            Console.WriteLine("double convert = " + convertToDouble("+0.67E-3"));  // << --------------------------------------delete
         }
 
 
@@ -113,14 +110,28 @@ namespace Kriterium
             while (exist.Length != 0 && !serialPort1.IsOpen)
             {
                 Thread.Sleep(500);
-                exist = serialPort1.ReadExisting();
+                try
+                {
+                    exist = serialPort1.ReadExisting();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 Console.WriteLine(exist);
             }
             exist = "check";
             while (exist.Length != 0 && !serialPort2.IsOpen)
             {
                 Thread.Sleep(500);
-                exist = serialPort2.ReadExisting();
+                try
+                {
+                    exist = serialPort2.ReadExisting();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 Console.WriteLine(exist);
             }
             closePorts();
@@ -188,10 +199,6 @@ namespace Kriterium
             cbPort2.SelectedIndex = p1;
         }
 
-        private void tbVolt2_TextChanged(object sender, EventArgs e)
-        {
-        }
-
         private void tbMin_TextChanged(object sender, EventArgs e)
         {
             saveNumber(tbMin.Text, "minValue");
@@ -253,17 +260,32 @@ namespace Kriterium
             while (exist.Length != 0 && serialPort1.IsOpen)
             {
                 Thread.Sleep(500);
-                exist = serialPort1.ReadExisting();
+                try
+                {
+                    exist = serialPort1.ReadExisting();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 Console.WriteLine(exist);
             }
             exist = "check";
             while (exist.Length != 0 && serialPort2.IsOpen)
             {
                 Thread.Sleep(500);
-                exist = serialPort2.ReadExisting();
+                try
+                {
+                    exist = serialPort2.ReadExisting();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 Console.WriteLine(exist);
             }
             closePorts();
+            Thread.Sleep(100);
         }
 
         private void cbVolt1_CheckedChanged(object sender, EventArgs e)
@@ -313,10 +335,9 @@ namespace Kriterium
                     serialPort1.WriteLine("MEAS:VOLT:AC? " + v1);
                     serialPort2.WriteLine("MEAS:VOLT:AC? " + v2);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
-                    throw;
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 //Thread.Sleep(500);
 
@@ -324,14 +345,14 @@ namespace Kriterium
                 {
                     p1 = serialPort1.ReadLine();
                     dPort1 = convertToDouble(p1);
-                    p1 = dPort1.ToString();
+                    p1 = dPort1.ToString("N4");
                     p2 = serialPort2.ReadLine();
                     dPort2 = convertToDouble(p2);
-                    p2 = dPort2.ToString();
+                    p2 = dPort2.ToString("N4");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
                 Console.WriteLine(p1);
@@ -343,10 +364,10 @@ namespace Kriterium
                 {
                     lblPort2.Text = p2;
                 }));
-                string kt = calcCoefficient(dPort1, dPort2);
+                double koeffcnt = calcCoefficient(dPort1, dPort2);
                 this.Invoke(new Action(() =>
                 {
-                    lblKoeff.Text = kt;
+                    lblKoeff.Text = koeffcnt.ToString("N4");
                 }));
 
 
@@ -354,25 +375,23 @@ namespace Kriterium
         }
 
         // change string from +3.569E-1 to 0.3569
-        private double convertToDouble(string data = "+3.5939E-1")
+        private double convertToDouble(string data)
         {
             double res = 0;
             data = Regex.Replace(data, @"\.", ",");
-
             Double.TryParse(data, out res);
             return res;
         }
 
         // calculating coefficient
-        private string calcCoefficient(double d1, double d2)
+        private double calcCoefficient(double d1, double d2)
         {
-            string res = "ERROR";
             double ans = d2 / d1;
-            //res = string.Format("{0:0.####}", ans);
-            res = ans.ToString("N4");
             setProgressBar(ans);
-            return res;
+            return ans;
         }
+
+        // 
 
         // change progress bar
         private void setProgressBar(double num)
