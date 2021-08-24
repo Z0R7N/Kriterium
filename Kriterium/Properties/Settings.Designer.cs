@@ -106,5 +106,29 @@ namespace Kriterium.Properties {
                 this["volt2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string maxPack {
+            get {
+                return ((string)(this["maxPack"]));
+            }
+            set {
+                this["maxPack"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string minPack {
+            get {
+                return ((string)(this["minPack"]));
+            }
+            set {
+                this["minPack"] = value;
+            }
+        }
     }
 }

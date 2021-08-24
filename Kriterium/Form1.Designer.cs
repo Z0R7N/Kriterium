@@ -64,8 +64,11 @@ namespace Kriterium
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.cbVolt1 = new System.Windows.Forms.CheckBox();
-            this.cbVolt2 = new System.Windows.Forms.CheckBox();
+            this.cbVolt1M = new System.Windows.Forms.CheckBox();
+            this.cbVolt2M = new System.Windows.Forms.CheckBox();
+            this.cbVolt1V = new System.Windows.Forms.CheckBox();
+            this.cbVolt2V = new System.Windows.Forms.CheckBox();
+            this.btnClearPack = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -352,7 +355,7 @@ namespace Kriterium
             this.label16.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label16.Location = new System.Drawing.Point(519, 552);
+            this.label16.Location = new System.Drawing.Point(531, 552);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(352, 25);
             this.label16.TabIndex = 38;
@@ -421,31 +424,68 @@ namespace Kriterium
             this.pictureBox1.TabIndex = 25;
             this.pictureBox1.TabStop = false;
             // 
-            // cbVolt1
+            // cbVolt1M
             // 
-            this.cbVolt1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cbVolt1.AutoSize = true;
-            this.cbVolt1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbVolt1.Location = new System.Drawing.Point(388, 136);
-            this.cbVolt1.Name = "cbVolt1";
-            this.cbVolt1.Size = new System.Drawing.Size(81, 29);
-            this.cbVolt1.TabIndex = 43;
-            this.cbVolt1.Text = "0,5 V";
-            this.cbVolt1.UseVisualStyleBackColor = true;
-            this.cbVolt1.CheckedChanged += new System.EventHandler(this.cbVolt1_CheckedChanged);
+            this.cbVolt1M.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbVolt1M.AutoSize = true;
+            this.cbVolt1M.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbVolt1M.Location = new System.Drawing.Point(388, 117);
+            this.cbVolt1M.Name = "cbVolt1M";
+            this.cbVolt1M.Size = new System.Drawing.Size(81, 29);
+            this.cbVolt1M.TabIndex = 43;
+            this.cbVolt1M.Text = "0,5 V";
+            this.cbVolt1M.UseVisualStyleBackColor = true;
+            this.cbVolt1M.CheckedChanged += new System.EventHandler(this.cbVolt1_CheckedChanged);
             // 
-            // cbVolt2
+            // cbVolt2M
             // 
-            this.cbVolt2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.cbVolt2.AutoSize = true;
-            this.cbVolt2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.cbVolt2.Location = new System.Drawing.Point(674, 136);
-            this.cbVolt2.Name = "cbVolt2";
-            this.cbVolt2.Size = new System.Drawing.Size(81, 29);
-            this.cbVolt2.TabIndex = 44;
-            this.cbVolt2.Text = "0,5 V";
-            this.cbVolt2.UseVisualStyleBackColor = true;
-            this.cbVolt2.CheckedChanged += new System.EventHandler(this.cbVolt2_CheckedChanged);
+            this.cbVolt2M.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbVolt2M.AutoSize = true;
+            this.cbVolt2M.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbVolt2M.Location = new System.Drawing.Point(674, 117);
+            this.cbVolt2M.Name = "cbVolt2M";
+            this.cbVolt2M.Size = new System.Drawing.Size(81, 29);
+            this.cbVolt2M.TabIndex = 44;
+            this.cbVolt2M.Text = "0,5 V";
+            this.cbVolt2M.UseVisualStyleBackColor = true;
+            this.cbVolt2M.CheckedChanged += new System.EventHandler(this.cbVolt2_CheckedChanged);
+            // 
+            // cbVolt1V
+            // 
+            this.cbVolt1V.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbVolt1V.AutoSize = true;
+            this.cbVolt1V.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbVolt1V.Location = new System.Drawing.Point(388, 152);
+            this.cbVolt1V.Name = "cbVolt1V";
+            this.cbVolt1V.Size = new System.Drawing.Size(75, 29);
+            this.cbVolt1V.TabIndex = 45;
+            this.cbVolt1V.Text = "  5 V";
+            this.cbVolt1V.UseVisualStyleBackColor = true;
+            this.cbVolt1V.CheckedChanged += new System.EventHandler(this.cbVolt1V_CheckedChanged);
+            // 
+            // cbVolt2V
+            // 
+            this.cbVolt2V.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.cbVolt2V.AutoSize = true;
+            this.cbVolt2V.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.cbVolt2V.Location = new System.Drawing.Point(674, 152);
+            this.cbVolt2V.Name = "cbVolt2V";
+            this.cbVolt2V.Size = new System.Drawing.Size(75, 29);
+            this.cbVolt2V.TabIndex = 46;
+            this.cbVolt2V.Text = "  5 V";
+            this.cbVolt2V.UseVisualStyleBackColor = true;
+            this.cbVolt2V.CheckedChanged += new System.EventHandler(this.cbVolt2V_CheckedChanged);
+            // 
+            // btnClearPack
+            // 
+            this.btnClearPack.BackColor = System.Drawing.Color.PeachPuff;
+            this.btnClearPack.Location = new System.Drawing.Point(431, 585);
+            this.btnClearPack.Name = "btnClearPack";
+            this.btnClearPack.Size = new System.Drawing.Size(100, 51);
+            this.btnClearPack.TabIndex = 47;
+            this.btnClearPack.Text = "Стереть";
+            this.btnClearPack.UseVisualStyleBackColor = false;
+            this.btnClearPack.Click += new System.EventHandler(this.btnClearPack_Click);
             // 
             // Form1
             // 
@@ -454,8 +494,11 @@ namespace Kriterium
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnStop;
             this.ClientSize = new System.Drawing.Size(984, 661);
-            this.Controls.Add(this.cbVolt2);
-            this.Controls.Add(this.cbVolt1);
+            this.Controls.Add(this.btnClearPack);
+            this.Controls.Add(this.cbVolt2V);
+            this.Controls.Add(this.cbVolt1V);
+            this.Controls.Add(this.cbVolt2M);
+            this.Controls.Add(this.cbVolt1M);
             this.Controls.Add(this.btnChange);
             this.Controls.Add(this.tbMaxPak);
             this.Controls.Add(this.label16);
@@ -492,7 +535,7 @@ namespace Kriterium
             this.MinimumSize = new System.Drawing.Size(950, 700);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Kriterium V0.3";
+            this.Text = "Kriterium V1.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -537,8 +580,11 @@ namespace Kriterium
         private System.Windows.Forms.TextBox tbMaxPak;
         private System.IO.Ports.SerialPort serialPort2;
         private System.Windows.Forms.Button btnChange;
-        private System.Windows.Forms.CheckBox cbVolt1;
-        private System.Windows.Forms.CheckBox cbVolt2;
+        private System.Windows.Forms.CheckBox cbVolt1M;
+        private System.Windows.Forms.CheckBox cbVolt2M;
+        private System.Windows.Forms.CheckBox cbVolt1V;
+        private System.Windows.Forms.CheckBox cbVolt2V;
+        private System.Windows.Forms.Button btnClearPack;
     }
 }
 
