@@ -55,7 +55,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>krit.ico</ApplicationIcon>
+    <ApplicationIcon>iconKT.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -103,6 +103,7 @@
     <None Include="assets\triangleRed.png" />
     <None Include="assets\triangleBlack.png" />
     <None Include="assets\arrowChange.png" />
+    <Content Include="iconKT.ico" />
     <Content Include="krit.ico" />
     <None Include="Resources\arrowRed.png" />
   </ItemGroup>

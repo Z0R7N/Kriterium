@@ -67,6 +67,9 @@ namespace Kriterium
             v2 = voltage2 ? 0.5 : 5;
 
             checkArguments();
+
+            Console.WriteLine("double convert = " + convertToDouble());  // << --------------------------------------delete
+            Console.WriteLine("double convert = " + convertToDouble("+0.67E-3"));  // << --------------------------------------delete
         }
 
 
@@ -328,7 +331,7 @@ namespace Kriterium
                 }
                 catch (Exception)
                 {
-                    //throw;
+                    throw;
                 }
 
                 Console.WriteLine(p1);
@@ -351,10 +354,11 @@ namespace Kriterium
         }
 
         // change string from +3.569E-1 to 0.3569
-        private double convertToDouble(string data)
+        private double convertToDouble(string data = "+3.5939E-1")
         {
             double res = 0;
             data = Regex.Replace(data, @"\.", ",");
+
             Double.TryParse(data, out res);
             return res;
         }
