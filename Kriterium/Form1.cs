@@ -19,6 +19,7 @@ namespace Kriterium
         string p2 = "";
         double dPort1, dPort2;                // double from p1 and p2
         string maxPack, minPack;              // numbers of maxium and minimum value in pack of items
+        double progressR100, progressL100;    // number for progress bars
 
         public Form1()
         {
@@ -95,6 +96,7 @@ namespace Kriterium
             {
                 blockElements();
                 btnStop.Focus();
+                setUpProgressBar();
                 try
                 {
                     serialPort1.PortName = cbPort1.Text;
@@ -444,19 +446,22 @@ namespace Kriterium
         // settings for progress bar
         private void setUpProgressBar()
         {
-
+            double progressL50 = normVal - minVal;
+            progressL100 = progressL50 * 2;
+            double progressR50 = maxVal - normVal;
+            progressR100 = progressR50 * 2;
         }
 
         // change progress bar
         private void setProgressBar(double num)
         {
 
-            if (num > 1)
+            if (num > normVal)
             {
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 50));
             }
-            else if (num < 1)
+            else if (num < normVal)
             {
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 50));
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
