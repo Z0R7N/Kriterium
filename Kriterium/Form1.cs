@@ -20,7 +20,8 @@ namespace Kriterium
         double dPort1, dPort2;                // double from p1 and p2
         string maxPack, minPack;              // numbers of maxium and minimum value in pack of items
         double progressR100, progressL100;    // number for progress bars
-
+        double progressR50, progressL50;
+        double dif, prcnt;                    // numbers for calculating progress bar value
         public Form1()
         {
             InitializeComponent();
@@ -363,8 +364,8 @@ namespace Kriterium
                 {
                     Thread.Sleep(100);
                 }
-                serialPort1.WriteLine("CONF:VOLT:AC " + v1);
-                serialPort2.WriteLine("CONF:VOLT:AC " + v2);
+                serialPort1.WriteLine("CONF:VOLT:DC " + v1);
+                serialPort2.WriteLine("CONF:VOLT:DC " + v2);
                 Thread lp = new Thread(loop);
                 lp.Start();
             }
@@ -382,8 +383,8 @@ namespace Kriterium
                 //timerLimit(500);
                 try
                 {
-                    serialPort1.WriteLine("MEAS:VOLT:AC? " + v1);
-                    serialPort2.WriteLine("MEAS:VOLT:AC? " + v2);
+                    serialPort1.WriteLine("MEAS:VOLT:DC? " + v1);
+                    serialPort2.WriteLine("MEAS:VOLT:DC? " + v2);
                 }
                 catch (Exception ex)
                 {
@@ -394,11 +395,9 @@ namespace Kriterium
                 try
                 {
                     p1 = serialPort1.ReadLine();
-                    tbMaxPak.Invoke((MethodInvoker)(() => tbMaxPak.Text = p1));
                     dPort1 = convertToDouble(p1, voltage1);
                     p1 = dPort1.ToString();
                     p2 = serialPort2.ReadLine();
-                    tbMinPak.Invoke((MethodInvoker)(() => tbMinPak.Text = p2));
                     dPort2 = convertToDouble(p2, voltage2);
                     p2 = dPort2.ToString();
                 }
@@ -446,10 +445,10 @@ namespace Kriterium
         // settings for progress bar
         private void setUpProgressBar()
         {
-            double progressL50 = normVal - minVal;
-            progressL100 = progressL50 * 2;
-            double progressR50 = maxVal - normVal;
-            progressR100 = progressR50 * 2;
+            progressL50 = normVal - minVal;
+            progressL100 = progressL50 + progressL50;
+            progressR50 = maxVal - normVal;
+            progressR100 = progressR50 + progressR50;
         }
 
         // change progress bar
@@ -459,18 +458,25 @@ namespace Kriterium
             if (num > normVal)
             {
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
-                pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 50));
+                dif = maxVal - num;
+                dif *= 100;
+                prcnt = dif / progressR100;
+                pbRight.Invoke((MethodInvoker)(() => pbRight.Value = (int)prcnt));
             }
             else if (num < normVal)
             {
-                pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 50));
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
+                dif = num - minVal;
+                dif *= 100;
+                prcnt = dif / progressL100;
+                pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = (int)prcnt));
             }
             else
             {
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
             }
+            tbMaxPak.Invoke((MethodInvoker)(() => tbMaxPak.Text = prcnt.ToString()));
         }
     }
 }
