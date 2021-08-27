@@ -13,7 +13,6 @@ namespace Kriterium
         string[] ports;
         bool voltage1, voltage2;              // voltage range - true = 0.5V,  false = 5V
         double maxVal, minVal, normVal;       // value for calculating
-        double lowValue, highValue;           // value for lowest and highest value of calculating
         bool work = false;                    // flag for click buttons start and stop
         double v1, v2;                        // volts set for devices
         string p1 = "";                       // volt string from devices
@@ -24,6 +23,7 @@ namespace Kriterium
         double progressR50, progressL50;
         double dif, prcnt;                    // numbers for calculating progress bar value
         string labelValue;                    // for change data in labels value
+        double variData, oldData = 0;         // value for check changing coefficient
 
         public Form1()
         {
@@ -36,9 +36,9 @@ namespace Kriterium
             string[] args = Environment.GetCommandLineArgs();
             if (args.Length > 1)
             {
-                minVal = convertToDouble(args[1]);
-                normVal = convertToDouble(args[2]);
-                maxVal = convertToDouble(args[3]);
+                minVal = ConvertToDouble(args[1]);
+                normVal = ConvertToDouble(args[2]);
+                maxVal = ConvertToDouble(args[3]);
             }
             else
             {
@@ -99,7 +99,7 @@ namespace Kriterium
             {
                 blockElements();
                 btnStop.Focus();
-                setUpProgressBar();
+                SetUpProgressBar();
                 try
                 {
                     serialPort1.PortName = cbPort1.Text;
@@ -222,7 +222,7 @@ namespace Kriterium
             labelValue = tbMin.Text;
             saveNumber(labelValue, "minValue");
             lblminVal.Text = labelValue;
-            minVal = convertToDouble(labelValue);
+            minVal = ConvertToDouble(labelValue);
         }
 
         private void tbNorm_TextChanged(object sender, EventArgs e)
@@ -230,7 +230,7 @@ namespace Kriterium
             labelValue = tbNorm.Text;
             saveNumber(labelValue, "normValue");
             lblNormVal.Text = labelValue;
-            normVal = convertToDouble(labelValue);
+            normVal = ConvertToDouble(labelValue);
         }
 
         private void tbMax_TextChanged(object sender, EventArgs e)
@@ -238,7 +238,7 @@ namespace Kriterium
             labelValue = tbMax.Text;
             saveNumber(labelValue, "maxValue");
             lblMaxVal.Text = labelValue;
-            maxVal = convertToDouble(labelValue);
+            maxVal = ConvertToDouble(labelValue);
         }
 
         // save bool for voltage
@@ -349,6 +349,7 @@ namespace Kriterium
             lblPort2.Text = "0,0000";
             pbLeft.Value = 0;
             pbRight.Value = 0;
+            zeroProgressBar();
         }
 
         private void cbVolt2V_CheckedChanged(object sender, EventArgs e)
@@ -376,8 +377,8 @@ namespace Kriterium
                 {
                     Thread.Sleep(100);
                 }
-                serialPort1.WriteLine("CONF:VOLT:DC " + v1);
-                serialPort2.WriteLine("CONF:VOLT:DC " + v2);
+                serialPort1.WriteLine("CONF:VOLT:AC " + v1);
+                serialPort2.WriteLine("CONF:VOLT:AC " + v2);
                 Thread lp = new Thread(loop);
                 lp.Start();
             }
@@ -394,8 +395,8 @@ namespace Kriterium
             {
                 try
                 {
-                    serialPort1.WriteLine("MEAS:VOLT:DC? " + v1);
-                    serialPort2.WriteLine("MEAS:VOLT:DC? " + v2);
+                    serialPort1.WriteLine("MEAS:VOLT:AC? " + v1);
+                    serialPort2.WriteLine("MEAS:VOLT:AC? " + v2);
                 }
                 catch (Exception ex)
                 {
@@ -406,10 +407,10 @@ namespace Kriterium
                 try
                 {
                     p1 = serialPort1.ReadLine();
-                    dPort1 = convertToDouble(p1, voltage1);
+                    dPort1 = ConvertToDouble(p1, voltage1);
                     p1 = dPort1.ToString();
                     p2 = serialPort2.ReadLine();
-                    dPort2 = convertToDouble(p2, voltage2);
+                    dPort2 = ConvertToDouble(p2, voltage2);
                     p2 = dPort2.ToString();
                 }
                 catch (Exception ex)
@@ -420,13 +421,13 @@ namespace Kriterium
                 Console.WriteLine(p1);
                 lblPort1.Invoke((MethodInvoker)(() => lblPort1.Text = p1));
                 lblPort2.Invoke((MethodInvoker)(() => lblPort2.Text = p2));
-                double koeffcnt = calcCoefficient(dPort1, dPort2);
+                double koeffcnt = CalcCoefficient(dPort1, dPort2);
                 lblKoeff.Invoke((MethodInvoker)(() => lblKoeff.Text = koeffcnt.ToString("N3")));
             }
         }
 
         // change string from +3.569E-1 to 0.3569
-        private double convertToDouble(string data, bool volt = false)
+        private double ConvertToDouble(string data, bool volt = false)
         {
             double res = 0;
             //data = Regex.Replace(data, @"\.", ",");
@@ -446,19 +447,19 @@ namespace Kriterium
         }
 
         // calculating coefficient
-        private double calcCoefficient(double d1, double d2)
+        private double CalcCoefficient(double d1, double d2)
         {
             double ans = 0;
             if (d1 != 0)
             {
                 ans = d2 / d1;
             }
-            setProgressBar(ans);
+            calculatingCoefficient(ans);
             return ans;
         }
 
         // settings for progress bar
-        private void setUpProgressBar()
+        private void SetUpProgressBar()
         {
             progressL50 = normVal - minVal;
             progressL100 = progressL50 + progressL50;
@@ -466,58 +467,81 @@ namespace Kriterium
             progressR100 = progressR50 + progressR50;
         }
 
-        // change progress bar
-        private void setProgressBar(double num)
+        // calculating coefficient of transformation
+        private void calculatingCoefficient(double num)
         {
-
+            prcnt = 0;
+            bool side = true;
             if (num > normVal)
             {
-                pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
                 dif = num - normVal;
-                prcnt = 0;
                 if (progressR100 != 0)
                 {
                     prcnt = dif * 100 / progressR100;
                 }
                 if (prcnt > 100) prcnt = 100;
-                pbRight.Invoke((MethodInvoker)(() => pbRight.Value = (int)prcnt));
-                if (prcnt > 50)
-                {
-                    pbRight.Invoke((MethodInvoker)(() => pbRight.ForeColor = Color.OrangeRed));
-                    pbRight.Invoke((MethodInvoker)(() => this.pbRight.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
-                }
-                else
-                {
-                    pbRight.Invoke((MethodInvoker)(() => pbRight.ForeColor = Color.LimeGreen));
-                    pbRight.Invoke((MethodInvoker)(() => this.pbRight.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
-                }
             }
-            else if (num < normVal)
+            if (num < normVal)
             {
-                pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
                 dif = normVal - num;
-                prcnt = 0;
                 if (progressL100 != 0)
                 {
                     prcnt = dif * 100 / progressL100;
                 }
                 if (prcnt > 100) prcnt = 100;
-                pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = (int)prcnt));
-                if (prcnt > 50)
-                {
-                    pbLeft.Invoke((MethodInvoker)(() => pbLeft.ForeColor = Color.OrangeRed));
-                    pbLeft.Invoke((MethodInvoker)(() => this.pbLeft.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
-                }
-                else
-                {
-                    pbLeft.Invoke((MethodInvoker)(() => pbLeft.ForeColor = Color.LimeGreen));
-                    pbLeft.Invoke((MethodInvoker)(() => this.pbLeft.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
-                }
+                side = false;
+            }
+            SetProgressBar(side);
+        }
+
+        // set progress bar to 0%
+        private void zeroProgressBar()
+        {
+            pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
+            pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
+        }
+
+        // change progress bar | if side true - add percent for right progress bar
+        private void SetProgressBar(bool side)
+        {
+            if (prcnt == 0)
+            {
+                zeroProgressBar();
+            }
+            else if(side)
+            {
+                pbRight.Invoke((MethodInvoker)(() => pbRight.Value = (int)prcnt));
+                pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
             }
             else
             {
-                pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
+                pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = (int)prcnt));
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
+            }
+            if (prcnt > 50)
+            {
+                pbLeft.Invoke((MethodInvoker)(() => pbLeft.ForeColor = Color.OrangeRed));
+                pbRight.Invoke((MethodInvoker)(() => pbRight.ForeColor = Color.OrangeRed));
+            }
+            else
+            {
+                pbLeft.Invoke((MethodInvoker)(() => pbLeft.ForeColor = Color.LimeGreen));
+                pbRight.Invoke((MethodInvoker)(() => pbRight.ForeColor = Color.LimeGreen));
+            }
+        }
+
+
+
+        // save value of maximum and minimum in batch
+        private void SaveValueBatch(double data)
+        {
+            if (data != oldData)
+            {
+                variData = data;
+                if (true)
+                {
+
+                }
             }
         }
     }
