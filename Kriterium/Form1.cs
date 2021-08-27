@@ -458,17 +458,15 @@ namespace Kriterium
             if (num > normVal)
             {
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
-                dif = maxVal - num;
-                dif *= 100;
-                prcnt = dif / progressR100;
+                dif = num - normVal;
+                prcnt = dif * 100 / progressR100;
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = (int)prcnt));
             }
             else if (num < normVal)
             {
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
-                dif = num - minVal;
-                dif *= 100;
-                prcnt = dif / progressL100;
+                dif = normVal - num;
+                prcnt = dif * 100 / progressL100;
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = (int)prcnt));
             }
             else
