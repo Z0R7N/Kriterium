@@ -69,6 +69,9 @@ namespace Kriterium
             this.cbVolt1V = new System.Windows.Forms.CheckBox();
             this.cbVolt2V = new System.Windows.Forms.CheckBox();
             this.btnClearPack = new System.Windows.Forms.Button();
+            this.lblNormVal = new System.Windows.Forms.Label();
+            this.lblminVal = new System.Windows.Forms.Label();
+            this.lblMaxVal = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -244,7 +247,7 @@ namespace Kriterium
             // pbRight
             // 
             this.pbRight.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pbRight.Location = new System.Drawing.Point(486, 325);
+            this.pbRight.Location = new System.Drawing.Point(491, 298);
             this.pbRight.Name = "pbRight";
             this.pbRight.Size = new System.Drawing.Size(397, 23);
             this.pbRight.Step = 1;
@@ -254,7 +257,7 @@ namespace Kriterium
             // pbLeft
             // 
             this.pbLeft.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.pbLeft.Location = new System.Drawing.Point(92, 325);
+            this.pbLeft.Location = new System.Drawing.Point(97, 298);
             this.pbLeft.Name = "pbLeft";
             this.pbLeft.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.pbLeft.RightToLeftLayout = true;
@@ -266,20 +269,20 @@ namespace Kriterium
             // lblPort1
             // 
             this.lblPort1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblPort1.AutoSize = true;
             this.lblPort1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblPort1.Location = new System.Drawing.Point(76, 448);
+            this.lblPort1.Location = new System.Drawing.Point(47, 448);
             this.lblPort1.Name = "lblPort1";
-            this.lblPort1.Size = new System.Drawing.Size(178, 55);
+            this.lblPort1.Size = new System.Drawing.Size(263, 55);
             this.lblPort1.TabIndex = 28;
             this.lblPort1.Text = "0,0000";
+            this.lblPort1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
             // 
             this.label10.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(119, 410);
+            this.label10.Location = new System.Drawing.Point(130, 410);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(102, 25);
             this.label10.TabIndex = 29;
@@ -290,7 +293,7 @@ namespace Kriterium
             this.label11.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(754, 410);
+            this.label11.Location = new System.Drawing.Point(749, 410);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(102, 25);
             this.label11.TabIndex = 30;
@@ -301,7 +304,7 @@ namespace Kriterium
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(411, 410);
+            this.label12.Location = new System.Drawing.Point(425, 410);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(150, 25);
             this.label12.TabIndex = 31;
@@ -310,24 +313,24 @@ namespace Kriterium
             // lblKoeff
             // 
             this.lblKoeff.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblKoeff.AutoSize = true;
             this.lblKoeff.Font = new System.Drawing.Font("Microsoft Sans Serif", 60F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lblKoeff.Location = new System.Drawing.Point(342, 435);
             this.lblKoeff.Name = "lblKoeff";
-            this.lblKoeff.Size = new System.Drawing.Size(287, 91);
+            this.lblKoeff.Size = new System.Drawing.Size(326, 91);
             this.lblKoeff.TabIndex = 32;
             this.lblKoeff.Text = "0,0000";
+            this.lblKoeff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblPort2
             // 
             this.lblPort2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblPort2.AutoSize = true;
             this.lblPort2.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lblPort2.Location = new System.Drawing.Point(716, 448);
+            this.lblPort2.Location = new System.Drawing.Point(691, 448);
             this.lblPort2.Name = "lblPort2";
-            this.lblPort2.Size = new System.Drawing.Size(178, 55);
+            this.lblPort2.Size = new System.Drawing.Size(219, 55);
             this.lblPort2.TabIndex = 33;
             this.lblPort2.Text = "0,0000";
+            this.lblPort2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tbMinPak
             // 
@@ -391,7 +394,7 @@ namespace Kriterium
             this.pictureBox3.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.ErrorImage")));
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.InitialImage")));
-            this.pictureBox3.Location = new System.Drawing.Point(663, 350);
+            this.pictureBox3.Location = new System.Drawing.Point(668, 323);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(43, 34);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -404,7 +407,7 @@ namespace Kriterium
             this.pictureBox2.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.ErrorImage")));
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.InitialImage")));
-            this.pictureBox2.Location = new System.Drawing.Point(465, 350);
+            this.pictureBox2.Location = new System.Drawing.Point(470, 323);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(46, 34);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -417,7 +420,7 @@ namespace Kriterium
             this.pictureBox1.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.ErrorImage")));
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.InitialImage")));
-            this.pictureBox1.Location = new System.Drawing.Point(268, 350);
+            this.pictureBox1.Location = new System.Drawing.Point(273, 323);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(45, 34);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -487,6 +490,39 @@ namespace Kriterium
             this.btnClearPack.UseVisualStyleBackColor = false;
             this.btnClearPack.Click += new System.EventHandler(this.btnClearPack_Click);
             // 
+            // lblNormVal
+            // 
+            this.lblNormVal.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblNormVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblNormVal.Location = new System.Drawing.Point(446, 360);
+            this.lblNormVal.Name = "lblNormVal";
+            this.lblNormVal.Size = new System.Drawing.Size(99, 25);
+            this.lblNormVal.TabIndex = 48;
+            this.lblNormVal.Text = "0";
+            this.lblNormVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblminVal
+            // 
+            this.lblminVal.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblminVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblminVal.Location = new System.Drawing.Point(248, 360);
+            this.lblminVal.Name = "lblminVal";
+            this.lblminVal.Size = new System.Drawing.Size(99, 25);
+            this.lblminVal.TabIndex = 49;
+            this.lblminVal.Text = "0";
+            this.lblminVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblMaxVal
+            // 
+            this.lblMaxVal.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblMaxVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lblMaxVal.Location = new System.Drawing.Point(642, 360);
+            this.lblMaxVal.Name = "lblMaxVal";
+            this.lblMaxVal.Size = new System.Drawing.Size(99, 25);
+            this.lblMaxVal.TabIndex = 50;
+            this.lblMaxVal.Text = "0";
+            this.lblMaxVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnStart;
@@ -494,6 +530,9 @@ namespace Kriterium
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnStop;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.lblMaxVal);
+            this.Controls.Add(this.lblminVal);
+            this.Controls.Add(this.lblNormVal);
             this.Controls.Add(this.btnClearPack);
             this.Controls.Add(this.cbVolt2V);
             this.Controls.Add(this.cbVolt1V);
@@ -586,6 +625,9 @@ namespace Kriterium
         private System.Windows.Forms.CheckBox cbVolt1V;
         private System.Windows.Forms.CheckBox cbVolt2V;
         private System.Windows.Forms.Button btnClearPack;
+        private System.Windows.Forms.Label lblNormVal;
+        private System.Windows.Forms.Label lblminVal;
+        private System.Windows.Forms.Label lblMaxVal;
     }
 }
 

@@ -1,5 +1,6 @@
 ﻿using Kriterium.Properties;
 using System;
+using System.Drawing;
 using System.IO.Ports;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -22,6 +23,8 @@ namespace Kriterium
         double progressR100, progressL100;    // number for progress bars
         double progressR50, progressL50;
         double dif, prcnt;                    // numbers for calculating progress bar value
+        string labelValue;                    // for change data in labels value
+
         public Form1()
         {
             InitializeComponent();
@@ -51,6 +54,7 @@ namespace Kriterium
         // when the app is started
         private void Form1_Load(object sender, EventArgs e)
         {
+            Application.EnableVisualStyles();
             ports = SerialPort.GetPortNames();
             cbPort1.Items.AddRange(ports);
             cbPort2.Items.AddRange(ports);
@@ -86,8 +90,6 @@ namespace Kriterium
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            Console.Write(cbPort1.Text + "  ");
-            Console.WriteLine(cbPort2.Text);
             if (cbPort1.Text == cbPort2.Text)
             {
                 MessageBox.Show("Порты приборов должны быть разными", "Сообщение", MessageBoxButtons.OK,
@@ -111,7 +113,6 @@ namespace Kriterium
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }
@@ -119,42 +120,41 @@ namespace Kriterium
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("button  stop  click");
             string exist = "check";
             while (exist.Length != 0 && !serialPort1.IsOpen)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 try
                 {
-                    exist = serialPort1.ReadExisting();
+                    exist = serialPort1.ReadLine();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message + " port 1", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 Console.WriteLine(exist);
             }
             exist = "check";
             while (exist.Length != 0 && !serialPort2.IsOpen)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
                 try
                 {
-                    exist = serialPort2.ReadExisting();
+                    exist = serialPort2.ReadLine();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message + " port 2", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 Console.WriteLine(exist);
             }
             closePorts();
             unBlockElements();
-            lblKoeff.Text = "0,0000";
-            lblPort1.Text = "0,0000";
-            lblPort2.Text = "0,0000";
-            pbLeft.Value = 0;
-            pbRight.Value = 0;
+            //lblKoeff.Text = "0,0000";
+            //lblPort1.Text = "0,0000";
+            //lblPort2.Text = "0,0000";
+            //pbLeft.Value = 0;
+            //pbRight.Value = 0;
             btnStart.Focus();
         }
 
@@ -219,17 +219,26 @@ namespace Kriterium
 
         private void tbMin_TextChanged(object sender, EventArgs e)
         {
-            saveNumber(tbMin.Text, "minValue");
+            labelValue = tbMin.Text;
+            saveNumber(labelValue, "minValue");
+            lblminVal.Text = labelValue;
+            minVal = convertToDouble(labelValue);
         }
 
         private void tbNorm_TextChanged(object sender, EventArgs e)
         {
-            saveNumber(tbNorm.Text, "normValue");
+            labelValue = tbNorm.Text;
+            saveNumber(labelValue, "normValue");
+            lblNormVal.Text = labelValue;
+            normVal = convertToDouble(labelValue);
         }
 
         private void tbMax_TextChanged(object sender, EventArgs e)
         {
-            saveNumber(tbMax.Text, "maxValue");
+            labelValue = tbMax.Text;
+            saveNumber(labelValue, "maxValue");
+            lblMaxVal.Text = labelValue;
+            maxVal = convertToDouble(labelValue);
         }
 
         // save bool for voltage
@@ -284,7 +293,7 @@ namespace Kriterium
             string exist = "check";
             while (exist.Length != 0 && serialPort1.IsOpen)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 try
                 {
                     exist = serialPort1.ReadExisting();
@@ -298,7 +307,7 @@ namespace Kriterium
             exist = "check";
             while (exist.Length != 0 && serialPort2.IsOpen)
             {
-                Thread.Sleep(1000);
+                Thread.Sleep(100);
                 try
                 {
                     exist = serialPort2.ReadExisting();
@@ -318,7 +327,6 @@ namespace Kriterium
             voltage1 = cbVolt1M.Checked;
             v1 = voltage1 ? 0.5 : 5;
             saveBool(voltage1, "volt1");
-            //if (cbVolt1V.Checked == voltage1) cbVolt1V.Checked = !voltage1;
             switchCheckBox();
         }
 
@@ -327,7 +335,6 @@ namespace Kriterium
             voltage1 = !cbVolt1V.Checked;
             v1 = voltage1 ? 0.5 : 5;
             saveBool(voltage1, "volt1");
-            //if (cbVolt1M.Checked != voltage1) cbVolt1M.Checked = voltage1;
             switchCheckBox();
         }
 
@@ -337,6 +344,11 @@ namespace Kriterium
             maxPack = "";
             saveString(minPack, "minPack");
             saveString(maxPack, "maxPack");
+            lblKoeff.Text = "0,0000";
+            lblPort1.Text = "0,0000";
+            lblPort2.Text = "0,0000";
+            pbLeft.Value = 0;
+            pbRight.Value = 0;
         }
 
         private void cbVolt2V_CheckedChanged(object sender, EventArgs e)
@@ -380,7 +392,6 @@ namespace Kriterium
         {
             while (work)
             {
-                //timerLimit(500);
                 try
                 {
                     serialPort1.WriteLine("MEAS:VOLT:DC? " + v1);
@@ -437,7 +448,11 @@ namespace Kriterium
         // calculating coefficient
         private double calcCoefficient(double d1, double d2)
         {
-            double ans = d2 / d1;
+            double ans = 0;
+            if (d1 != 0)
+            {
+                ans = d2 / d1;
+            }
             setProgressBar(ans);
             return ans;
         }
@@ -459,22 +474,51 @@ namespace Kriterium
             {
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
                 dif = num - normVal;
-                prcnt = dif * 100 / progressR100;
+                prcnt = 0;
+                if (progressR100 != 0)
+                {
+                    prcnt = dif * 100 / progressR100;
+                }
+                if (prcnt > 100) prcnt = 100;
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = (int)prcnt));
+                if (prcnt > 50)
+                {
+                    pbRight.Invoke((MethodInvoker)(() => pbRight.ForeColor = Color.OrangeRed));
+                    pbRight.Invoke((MethodInvoker)(() => this.pbRight.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
+                }
+                else
+                {
+                    pbRight.Invoke((MethodInvoker)(() => pbRight.ForeColor = Color.LimeGreen));
+                    pbRight.Invoke((MethodInvoker)(() => this.pbRight.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
+                }
             }
             else if (num < normVal)
             {
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
                 dif = normVal - num;
-                prcnt = dif * 100 / progressL100;
+                prcnt = 0;
+                if (progressL100 != 0)
+                {
+                    prcnt = dif * 100 / progressL100;
+                }
+                if (prcnt > 100) prcnt = 100;
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = (int)prcnt));
+                if (prcnt > 50)
+                {
+                    pbLeft.Invoke((MethodInvoker)(() => pbLeft.ForeColor = Color.OrangeRed));
+                    pbLeft.Invoke((MethodInvoker)(() => this.pbLeft.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
+                }
+                else
+                {
+                    pbLeft.Invoke((MethodInvoker)(() => pbLeft.ForeColor = Color.LimeGreen));
+                    pbLeft.Invoke((MethodInvoker)(() => this.pbLeft.Style = System.Windows.Forms.ProgressBarStyle.Continuous));
+                }
             }
             else
             {
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = 0));
             }
-            tbMaxPak.Invoke((MethodInvoker)(() => tbMaxPak.Text = prcnt.ToString()));
         }
     }
 }
