@@ -24,6 +24,7 @@ namespace Kriterium
         double dif, prcnt;                    // numbers for calculating progress bar value
         string labelValue;                    // for change data in labels value
         double variData, oldData = 0;         // value for check changing coefficient
+        long oldTime, timer = 3000;           // value for check timer and count for timer = 3 sec
 
         public Form1()
         {
@@ -76,6 +77,23 @@ namespace Kriterium
             minPack = Settings.Default["minPack"].ToString();
             tbMaxPak.Text = maxPack;
             tbMinPak.Text = minPack;
+        }
+
+        // method for set time for timer
+        private void setTimer(int t = 300000)
+        {
+            oldTime = DateTime.Now.Ticks + t;
+        }
+
+        // timer
+        private bool checkTimer()
+        {
+            long t = DateTime.Now.Ticks;
+            if (t - oldTime > timer)
+            {
+                return true;
+            }
+            return false;
         }
 
 
@@ -422,6 +440,7 @@ namespace Kriterium
                 lblPort1.Invoke((MethodInvoker)(() => lblPort1.Text = p1));
                 lblPort2.Invoke((MethodInvoker)(() => lblPort2.Text = p2));
                 double koeffcnt = CalcCoefficient(dPort1, dPort2);
+                SaveValueBatch(koeffcnt);
                 lblKoeff.Invoke((MethodInvoker)(() => lblKoeff.Text = koeffcnt.ToString("N3")));
             }
         }
@@ -508,7 +527,7 @@ namespace Kriterium
             {
                 zeroProgressBar();
             }
-            else if(side)
+            else if (side)
             {
                 pbRight.Invoke((MethodInvoker)(() => pbRight.Value = (int)prcnt));
                 pbLeft.Invoke((MethodInvoker)(() => pbLeft.Value = 0));
