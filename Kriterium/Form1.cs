@@ -24,7 +24,7 @@ namespace Kriterium
         double dif, prcnt;                    // numbers for calculating progress bar value
         string labelValue;                    // for change data in labels value
         double variData, oldData = 0;         // value for check changing coefficient
-        long oldTime, timer = 300000;         // value for check timer and count for timer = 3 sec
+        long oldTime, timer = 450000;         // value for check timer and count for timer = 4,5 sec
 
         public Form1()
         {
@@ -80,19 +80,22 @@ namespace Kriterium
         }
 
         // method for set time for timer
-        private void setTimer(int t = 300000)
+        private void setTimer()
         {
-            oldTime = DateTime.Now.Ticks + t;
+            oldTime = DateTime.Now.Ticks + timer;
         }
 
         // timer
         private bool checkTimer()
         {
             long t = DateTime.Now.Ticks;
-            if (t - oldTime > timer)
+            long tm = t - oldTime;
+            if (tm > timer)
             {
+                signalSaving();
                 return true;
             }
+            signalSaving(tm);
             return false;
         }
 
@@ -138,34 +141,35 @@ namespace Kriterium
 
         private void btnStop_Click(object sender, EventArgs e)
         {
-            string exist = "check";
-            while (exist.Length != 0 && !serialPort1.IsOpen)
-            {
-                Thread.Sleep(2000);
-                try
-                {
-                    exist = serialPort1.ReadLine();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message + " port 1", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                Console.WriteLine(exist);
-            }
-            exist = "check";
-            while (exist.Length != 0 && !serialPort2.IsOpen)
-            {
-                Thread.Sleep(100);
-                try
-                {
-                    exist = serialPort2.ReadLine();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message + " port 2", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                Console.WriteLine(exist);
-            }
+            work = false;
+            Thread.Sleep(200);
+            //string exist = "check";
+            //while (exist.Length != 0 && !serialPort1.IsOpen)
+            //{
+            //    try
+            //    {
+            //        exist = serialPort1.ReadExisting();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message + " port 1", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    Console.WriteLine(exist);
+            //}
+            //exist = "check";
+            //while (exist.Length != 0 && !serialPort2.IsOpen)
+            //{
+            //    Thread.Sleep(100);
+            //    try
+            //    {
+            //        exist = serialPort2.ReadExisting();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message + " port 2", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    Console.WriteLine(exist);
+            //}
             closePorts();
             unBlockElements();
             //lblKoeff.Text = "0,0000";
@@ -209,7 +213,6 @@ namespace Kriterium
             tbMin.Enabled = true;
             tbMax.Enabled = true;
             tbNorm.Enabled = true;
-            work = false;
         }
 
         //  changed combo box port 1
@@ -308,36 +311,36 @@ namespace Kriterium
         // when the application is closed
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            string exist = "check";
-            while (exist.Length != 0 && serialPort1.IsOpen)
-            {
-                Thread.Sleep(2000);
-                try
-                {
-                    exist = serialPort1.ReadExisting();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                Console.WriteLine(exist);
-            }
-            exist = "check";
-            while (exist.Length != 0 && serialPort2.IsOpen)
-            {
-                Thread.Sleep(100);
-                try
-                {
-                    exist = serialPort2.ReadExisting();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                Console.WriteLine(exist);
-            }
+            work = false;
+            Thread.Sleep(200);
+            //string exist = "check";
+            //while (exist.Length != 0 && serialPort1.IsOpen)
+            //{
+            //    try
+            //    {
+            //        exist = serialPort1.ReadExisting();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    Console.WriteLine(exist);
+            //}
+            //exist = "check";
+            //while (exist.Length != 0 && serialPort2.IsOpen)
+            //{
+            //    Thread.Sleep(100);
+            //    try
+            //    {
+            //        exist = serialPort2.ReadExisting();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //    Console.WriteLine(exist);
+            //}
             closePorts();
-            Thread.Sleep(100);
         }
 
         private void cbVolt1_CheckedChanged(object sender, EventArgs e)
@@ -554,19 +557,35 @@ namespace Kriterium
         // save value of maximum and minimum in batch
         private void SaveValueBatch(double data)
         {
-            if (data == oldData)
+            if (dPort1 > 0.005 && dPort2 > 0.005)
             {
-            }
-            else if (data > oldData)
-            {
-                variData = data + data * 20 / 100;
-                if (variData > data)
+                if (data == oldData)
                 {
-                    diferentCoefficient(data);
+                    equalsCoefficient(data);
+                }
+                else if (data > oldData)
+                {
+                    variData = data + data * 20 / 100;
+                    if (variData > oldData)
+                    {
+                        diferentCoefficient(data);
+                    }
+                    else
+                    {
+                        equalsCoefficient(data);
+                    }
                 }
                 else
                 {
-
+                    variData = data - data * 20 / 100;
+                    if (variData < oldData)
+                    {
+                        diferentCoefficient(data);
+                    }
+                    else
+                    {
+                        equalsCoefficient(data);
+                    }
                 }
             }
         }
@@ -585,18 +604,33 @@ namespace Kriterium
             if (checkTimer())
             {
                 // save number
-                if (maxPack < data)
+                if (maxPack < data && data <= maxVal)
                 {
-
+                    maxPack = data;
+                    tbMaxPak.Invoke((MethodInvoker)(() => tbMaxPak.Text = maxPack.ToString()));
+                    Settings.Default["maxPack"] = maxPack;
+                    Settings.Default.Save();
+                }
+                if (minPack > data && data >= minVal)
+                {
+                    minPack = data;
+                    tbMinPak.Invoke((MethodInvoker)(() => tbMinPak.Text = minPack.ToString()));
+                    Settings.Default["minPack"] = minPack;
+                    Settings.Default.Save();
                 }
                 oldData = 0;
             }
         }
 
         // method for signaling the storage of a number
-        private void signalSaving()
+        private void signalSaving(long tm = -1)
         {
             // change fone of application for few seconds
+            if (tm < 0)
+            {
+
+            }
+
         }
     }
 }
