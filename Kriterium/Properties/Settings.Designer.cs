@@ -109,10 +109,10 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string maxPack {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double maxPack {
             get {
-                return ((string)(this["maxPack"]));
+                return ((double)(this["maxPack"]));
             }
             set {
                 this["maxPack"] = value;
@@ -121,10 +121,10 @@ namespace Kriterium.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string minPack {
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double minPack {
             get {
-                return ((string)(this["minPack"]));
+                return ((double)(this["minPack"]));
             }
             set {
                 this["minPack"] = value;

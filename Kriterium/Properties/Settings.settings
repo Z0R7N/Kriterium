@@ -23,11 +23,11 @@
     <Setting Name="volt2" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="maxPack" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="maxPack" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="minPack" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+    <Setting Name="minPack" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

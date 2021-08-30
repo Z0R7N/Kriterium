@@ -18,13 +18,13 @@ namespace Kriterium
         string p1 = "";                       // volt string from devices
         string p2 = "";
         double dPort1, dPort2;                // double from p1 and p2
-        string maxPack, minPack;              // numbers of maxium and minimum value in pack of items
+        double maxPack, minPack;              // numbers of maxium and minimum value in pack of items
         double progressR100, progressL100;    // number for progress bars
         double progressR50, progressL50;
         double dif, prcnt;                    // numbers for calculating progress bar value
         string labelValue;                    // for change data in labels value
         double variData, oldData = 0;         // value for check changing coefficient
-        long oldTime, timer = 3000;           // value for check timer and count for timer = 3 sec
+        long oldTime, timer = 300000;         // value for check timer and count for timer = 3 sec
 
         public Form1()
         {
@@ -73,10 +73,10 @@ namespace Kriterium
 
             checkArguments();
 
-            maxPack = Settings.Default["maxPack"].ToString();
-            minPack = Settings.Default["minPack"].ToString();
-            tbMaxPak.Text = maxPack;
-            tbMinPak.Text = minPack;
+            maxPack = (double)Settings.Default["maxPack"];
+            minPack = (double)Settings.Default["minPack"];
+            tbMaxPak.Text = maxPack.ToString();
+            tbMinPak.Text = minPack.ToString();
         }
 
         // method for set time for timer
@@ -267,7 +267,7 @@ namespace Kriterium
         }
 
         // save string to settings
-        private void saveString(string text, string sett)
+        private void saveString(double text, string sett)
         {
             Settings.Default[sett] = text;
             Settings.Default.Save();
@@ -358,8 +358,8 @@ namespace Kriterium
 
         private void btnClearPack_Click(object sender, EventArgs e)
         {
-            minPack = "";
-            maxPack = "";
+            minPack = 0;
+            maxPack = 0;
             saveString(minPack, "minPack");
             saveString(maxPack, "maxPack");
             lblKoeff.Text = "0,0000";
@@ -554,14 +554,49 @@ namespace Kriterium
         // save value of maximum and minimum in batch
         private void SaveValueBatch(double data)
         {
-            if (data != oldData)
+            if (data == oldData)
             {
-                variData = data;
-                if (true)
+            }
+            else if (data > oldData)
+            {
+                variData = data + data * 20 / 100;
+                if (variData > data)
+                {
+                    diferentCoefficient(data);
+                }
+                else
                 {
 
                 }
             }
+        }
+
+        // if coefficient different
+        private void diferentCoefficient(double data)
+        {
+            oldData = data;
+            setTimer();
+        }
+
+        // if new cofficient same to old coefficient
+        private void equalsCoefficient(double data)
+        {
+            oldData = data;
+            if (checkTimer())
+            {
+                // save number
+                if (maxPack < data)
+                {
+
+                }
+                oldData = 0;
+            }
+        }
+
+        // method for signaling the storage of a number
+        private void signalSaving()
+        {
+            // change fone of application for few seconds
         }
     }
 }
