@@ -72,6 +72,7 @@ namespace Kriterium
             this.lblNormVal = new System.Windows.Forms.Label();
             this.lblminVal = new System.Windows.Forms.Label();
             this.lblMaxVal = new System.Windows.Forms.Label();
+            this.lblTestUnit = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -523,13 +524,24 @@ namespace Kriterium
             this.lblMaxVal.Text = "0";
             this.lblMaxVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // lblTestUnit
+            // 
+            this.lblTestUnit.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTestUnit.Location = new System.Drawing.Point(791, 119);
+            this.lblTestUnit.Name = "lblTestUnit";
+            this.lblTestUnit.Size = new System.Drawing.Size(181, 65);
+            this.lblTestUnit.TabIndex = 51;
+            this.lblTestUnit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnStart;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CancelButton = this.btnStop;
             this.ClientSize = new System.Drawing.Size(984, 661);
+            this.Controls.Add(this.lblTestUnit);
             this.Controls.Add(this.lblMaxVal);
             this.Controls.Add(this.lblminVal);
             this.Controls.Add(this.lblNormVal);
@@ -628,6 +640,7 @@ namespace Kriterium
         private System.Windows.Forms.Label lblNormVal;
         private System.Windows.Forms.Label lblminVal;
         private System.Windows.Forms.Label lblMaxVal;
+        private System.Windows.Forms.Label lblTestUnit;
     }
 }
 

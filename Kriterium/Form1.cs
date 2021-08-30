@@ -24,7 +24,7 @@ namespace Kriterium
         double dif, prcnt;                    // numbers for calculating progress bar value
         string labelValue;                    // for change data in labels value
         double variData, oldData = 0;         // value for check changing coefficient
-        long oldTime, timer = 450000;         // value for check timer and count for timer = 4,5 sec
+        long oldTime, timer = 45000000;       // value for check timer and count for timer = 4,5 sec
 
         public Form1()
         {
@@ -79,23 +79,29 @@ namespace Kriterium
             tbMinPak.Text = minPack.ToString();
         }
 
+
         // method for set time for timer
         private void setTimer()
         {
-            oldTime = DateTime.Now.Ticks + timer;
+            oldTime = DateTime.Now.Ticks;
+            Console.WriteLine("old time = " + oldTime);
         }
 
-        // timer
+        // timer, if time is out returns true
         private bool checkTimer()
         {
             long t = DateTime.Now.Ticks;
+            Console.WriteLine("t = " + t);
             long tm = t - oldTime;
+            Console.WriteLine("tm = " + tm);
             if (tm > timer)
             {
                 signalSaving();
+                Console.WriteLine("timer true time is out");
                 return true;
             }
             signalSaving(tm);
+            Console.WriteLine("timer false");
             return false;
         }
 
@@ -628,9 +634,15 @@ namespace Kriterium
             // change fone of application for few seconds
             if (tm < 0)
             {
-
+                this.Invoke((MethodInvoker)(() => this.BackColor = Color.Orange));
+                lblTestUnit.Invoke((MethodInvoker)(() => lblTestUnit.Text = tm.ToString()));
             }
-
+            else
+            {
+                string x = (tm / 10000000).ToString();
+                this.Invoke((MethodInvoker)(() => this.BackColor = Color.WhiteSmoke));
+                lblTestUnit.Invoke((MethodInvoker)(() => lblTestUnit.Text = x));
+            }
         }
     }
 }
