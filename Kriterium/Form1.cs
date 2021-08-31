@@ -85,6 +85,7 @@ namespace Kriterium
         private void setTimer()
         {
             oldTime = DateTime.Now.Ticks;
+            this.Invoke((MethodInvoker)(() => BackColor = Color.WhiteSmoke));
         }
 
 
@@ -176,6 +177,7 @@ namespace Kriterium
             closePorts();
             unBlockElements();
             BackColor = Color.WhiteSmoke;
+
             btnStart.Focus();
         }
 
@@ -401,6 +403,7 @@ namespace Kriterium
                 serialPort1.WriteLine("CONF:VOLT:AC " + v1);
                 serialPort2.WriteLine("CONF:VOLT:AC " + v2);
                 Thread lp = new Thread(loop);
+                setTimer();
                 lp.Start();
             }
             catch (Exception ex)
@@ -445,6 +448,7 @@ namespace Kriterium
                 SaveValueBatch(Math.Round(koeffcnt, 3));
                 lblKoeff.Invoke((MethodInvoker)(() => lblKoeff.Text = koeffcnt.ToString("N3")));
             }
+            this.Invoke((MethodInvoker)(() => BackColor = Color.WhiteSmoke));
         }
 
         // change string from +3.569E-1 to 0.3569
