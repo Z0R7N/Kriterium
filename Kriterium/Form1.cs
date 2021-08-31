@@ -176,11 +176,6 @@ namespace Kriterium
             closePorts();
             unBlockElements();
             BackColor = Color.WhiteSmoke;
-            //lblKoeff.Text = "0,0000";
-            //lblPort1.Text = "0,0000";
-            //lblPort2.Text = "0,0000";
-            //pbLeft.Value = 0;
-            //pbRight.Value = 0;
             btnStart.Focus();
         }
 
@@ -285,7 +280,6 @@ namespace Kriterium
             data = Regex.Replace(data, @"\.", ",");
             double v;
             Double.TryParse(data, out v);
-            Console.WriteLine("data = " + v);
             Settings.Default[sett] = v;
             Settings.Default.Save();
         }
@@ -445,7 +439,6 @@ namespace Kriterium
                     MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                Console.WriteLine(p1);
                 lblPort1.Invoke((MethodInvoker)(() => lblPort1.Text = p1));
                 lblPort2.Invoke((MethodInvoker)(() => lblPort2.Text = p2));
                 double koeffcnt = CalcCoefficient(dPort1, dPort2);

@@ -72,7 +72,6 @@ namespace Kriterium
             this.lblNormVal = new System.Windows.Forms.Label();
             this.lblminVal = new System.Windows.Forms.Label();
             this.lblMaxVal = new System.Windows.Forms.Label();
-            this.lblTestUnit = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -527,15 +526,6 @@ namespace Kriterium
             this.lblMaxVal.Text = "0";
             this.lblMaxVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTestUnit
-            // 
-            this.lblTestUnit.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.lblTestUnit.Location = new System.Drawing.Point(791, 119);
-            this.lblTestUnit.Name = "lblTestUnit";
-            this.lblTestUnit.Size = new System.Drawing.Size(181, 65);
-            this.lblTestUnit.TabIndex = 51;
-            this.lblTestUnit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Form1
             // 
             this.AcceptButton = this.btnStart;
@@ -544,7 +534,6 @@ namespace Kriterium
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CancelButton = this.btnStop;
             this.ClientSize = new System.Drawing.Size(984, 661);
-            this.Controls.Add(this.lblTestUnit);
             this.Controls.Add(this.lblMaxVal);
             this.Controls.Add(this.lblminVal);
             this.Controls.Add(this.lblNormVal);
@@ -590,7 +579,7 @@ namespace Kriterium
             this.MinimumSize = new System.Drawing.Size(950, 700);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Kriterium V1.5";
+            this.Text = "Kriterium     V1.7";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -643,7 +632,6 @@ namespace Kriterium
         private System.Windows.Forms.Label lblNormVal;
         private System.Windows.Forms.Label lblminVal;
         private System.Windows.Forms.Label lblMaxVal;
-        private System.Windows.Forms.Label lblTestUnit;
     }
 }
 
