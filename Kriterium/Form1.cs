@@ -24,7 +24,7 @@ namespace Kriterium
         double dif, prcnt;                    // numbers for calculating progress bar value
         string labelValue;                    // for change data in labels value
         double variData, oldData = 0;         // value for check changing coefficient
-        long oldTime, timer = 45000000;       // value for check timer and count for timer = 4,5 sec
+        long oldTime, timer = 20000000;       // value for check timer and count for timer = 3 sec
 
         public Form1()
         {
@@ -75,8 +75,9 @@ namespace Kriterium
 
             maxPack = (double)Settings.Default["maxPack"];
             minPack = (double)Settings.Default["minPack"];
-            tbMaxPak.Text = maxPack.ToString();
-            tbMinPak.Text = minPack.ToString();
+            minPack = minPack == 0 ? normVal : minPack;
+            tbMaxPak.Text = maxPack == 0 ? "" : maxPack.ToString();
+            tbMinPak.Text = minPack == normVal ? "" : minPack.ToString();
         }
 
 
@@ -84,24 +85,20 @@ namespace Kriterium
         private void setTimer()
         {
             oldTime = DateTime.Now.Ticks;
-            Console.WriteLine("old time = " + oldTime);
         }
+
 
         // timer, if time is out returns true
         private bool checkTimer()
         {
             long t = DateTime.Now.Ticks;
-            Console.WriteLine("t = " + t);
             long tm = t - oldTime;
-            Console.WriteLine("tm = " + tm);
             if (tm > timer)
             {
                 signalSaving();
-                Console.WriteLine("timer true time is out");
                 return true;
             }
             signalSaving(tm);
-            Console.WriteLine("timer false");
             return false;
         }
 
@@ -178,6 +175,7 @@ namespace Kriterium
             //}
             closePorts();
             unBlockElements();
+            BackColor = Color.WhiteSmoke;
             //lblKoeff.Text = "0,0000";
             //lblPort1.Text = "0,0000";
             //lblPort2.Text = "0,0000";
@@ -276,7 +274,7 @@ namespace Kriterium
         }
 
         // save string to settings
-        private void saveString(double text, string sett)
+        private void saveDouble(double text, string sett)
         {
             Settings.Default[sett] = text;
             Settings.Default.Save();
@@ -367,13 +365,15 @@ namespace Kriterium
 
         private void btnClearPack_Click(object sender, EventArgs e)
         {
-            minPack = 0;
+            minPack = normVal;
             maxPack = 0;
-            saveString(minPack, "minPack");
-            saveString(maxPack, "maxPack");
-            lblKoeff.Text = "0,0000";
-            lblPort1.Text = "0,0000";
-            lblPort2.Text = "0,0000";
+            saveDouble(minPack, "minPack");
+            saveDouble(maxPack, "maxPack");
+            tbMaxPak.Text = "";
+            tbMinPak.Text = "";
+            lblKoeff.Text = "0,000";
+            lblPort1.Text = "0,000";
+            lblPort2.Text = "0,000";
             pbLeft.Value = 0;
             pbRight.Value = 0;
             zeroProgressBar();
@@ -449,7 +449,7 @@ namespace Kriterium
                 lblPort1.Invoke((MethodInvoker)(() => lblPort1.Text = p1));
                 lblPort2.Invoke((MethodInvoker)(() => lblPort2.Text = p2));
                 double koeffcnt = CalcCoefficient(dPort1, dPort2);
-                SaveValueBatch(koeffcnt);
+                SaveValueBatch(Math.Round(koeffcnt, 3));
                 lblKoeff.Invoke((MethodInvoker)(() => lblKoeff.Text = koeffcnt.ToString("N3")));
             }
         }
@@ -563,15 +563,15 @@ namespace Kriterium
         // save value of maximum and minimum in batch
         private void SaveValueBatch(double data)
         {
-            if (dPort1 > 0.005 && dPort2 > 0.005)
+            if (dPort1 > 0.005 && dPort2 > 0.005 && data >= minVal && data <= maxVal)
             {
                 if (data == oldData)
                 {
                     equalsCoefficient(data);
                 }
-                else if (data > oldData)
+                if (data > oldData)
                 {
-                    variData = data + data * 20 / 100;
+                    variData = data + data * 0.1 / 100;
                     if (variData > oldData)
                     {
                         diferentCoefficient(data);
@@ -581,9 +581,9 @@ namespace Kriterium
                         equalsCoefficient(data);
                     }
                 }
-                else
+                if (data < oldData)
                 {
-                    variData = data - data * 20 / 100;
+                    variData = data - data * 0.1 / 100;
                     if (variData < oldData)
                     {
                         diferentCoefficient(data);
@@ -593,6 +593,10 @@ namespace Kriterium
                         equalsCoefficient(data);
                     }
                 }
+            }
+            else
+            {
+                this.Invoke((MethodInvoker)(() => BackColor = Color.WhiteSmoke));
             }
         }
 
@@ -606,27 +610,28 @@ namespace Kriterium
         // if new cofficient same to old coefficient
         private void equalsCoefficient(double data)
         {
-            oldData = data;
             if (checkTimer())
             {
-                // save number
-                if (maxPack < data && data <= maxVal)
-                {
-                    maxPack = data;
-                    tbMaxPak.Invoke((MethodInvoker)(() => tbMaxPak.Text = maxPack.ToString()));
-                    Settings.Default["maxPack"] = maxPack;
-                    Settings.Default.Save();
-                }
-                if (minPack > data && data >= minVal)
+                // save number no min
+                if (minPack > data && data <= normVal)
                 {
                     minPack = data;
                     tbMinPak.Invoke((MethodInvoker)(() => tbMinPak.Text = minPack.ToString()));
                     Settings.Default["minPack"] = minPack;
                     Settings.Default.Save();
                 }
+                // save number to max
+                if (maxPack < data && data >= normVal)
+                {
+                    maxPack = data;
+                    tbMaxPak.Invoke((MethodInvoker)(() => tbMaxPak.Text = maxPack.ToString()));
+                    Settings.Default["maxPack"] = maxPack;
+                    Settings.Default.Save();
+                }
                 oldData = 0;
             }
         }
+
 
         // method for signaling the storage of a number
         private void signalSaving(long tm = -1)
@@ -634,14 +639,29 @@ namespace Kriterium
             // change fone of application for few seconds
             if (tm < 0)
             {
-                this.Invoke((MethodInvoker)(() => this.BackColor = Color.Orange));
-                lblTestUnit.Invoke((MethodInvoker)(() => lblTestUnit.Text = tm.ToString()));
+                // if time is out
+                this.Invoke((MethodInvoker)(() => BackColor = Color.FromArgb(255, 240, 163)));
+                Thread.Sleep(150);
+                this.Invoke((MethodInvoker)(() => BackColor = Color.WhiteSmoke));
             }
             else
             {
-                string x = (tm / 10000000).ToString();
-                this.Invoke((MethodInvoker)(() => this.BackColor = Color.WhiteSmoke));
-                lblTestUnit.Invoke((MethodInvoker)(() => lblTestUnit.Text = x));
+                // if time go up
+                // color for green: red - 194; green - 224; blue - 196
+                // color for white: red, green, blue - 245;
+                // difference for interest: red - 51; green - 21; blue - 49
+                double timePrcnt = tm * 100 / timer;
+                timePrcnt = 100 - timePrcnt;
+                double dRed = 51 * timePrcnt / 100;
+                double dGreen = 21 * timePrcnt / 100;
+                double dBlue = 49 * timePrcnt / 100;
+                dRed += 194;
+                dGreen += 224;
+                dBlue += 196;
+                int r = (int)dRed;
+                int g = (int)dGreen;
+                int b = (int)dBlue;
+                this.Invoke((MethodInvoker)(() => BackColor = Color.FromArgb(r, g, b)));
             }
         }
     }

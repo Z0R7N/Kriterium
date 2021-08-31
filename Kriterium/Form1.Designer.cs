@@ -275,7 +275,7 @@ namespace Kriterium
             this.lblPort1.Name = "lblPort1";
             this.lblPort1.Size = new System.Drawing.Size(263, 55);
             this.lblPort1.TabIndex = 28;
-            this.lblPort1.Text = "0,0000";
+            this.lblPort1.Text = "0,000";
             this.lblPort1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label10
@@ -319,7 +319,7 @@ namespace Kriterium
             this.lblKoeff.Name = "lblKoeff";
             this.lblKoeff.Size = new System.Drawing.Size(326, 91);
             this.lblKoeff.TabIndex = 32;
-            this.lblKoeff.Text = "0,0000";
+            this.lblKoeff.Text = "0,000";
             this.lblKoeff.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblPort2
@@ -330,18 +330,19 @@ namespace Kriterium
             this.lblPort2.Name = "lblPort2";
             this.lblPort2.Size = new System.Drawing.Size(219, 55);
             this.lblPort2.TabIndex = 33;
-            this.lblPort2.Text = "0,0000";
+            this.lblPort2.Text = "0,000";
             this.lblPort2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tbMinPak
             // 
             this.tbMinPak.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbMinPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbMinPak.Location = new System.Drawing.Point(124, 593);
+            this.tbMinPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMinPak.Location = new System.Drawing.Point(119, 591);
             this.tbMinPak.Name = "tbMinPak";
             this.tbMinPak.ReadOnly = true;
-            this.tbMinPak.Size = new System.Drawing.Size(263, 31);
+            this.tbMinPak.Size = new System.Drawing.Size(263, 40);
             this.tbMinPak.TabIndex = 34;
+            this.tbMinPak.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label15
             // 
@@ -368,12 +369,13 @@ namespace Kriterium
             // tbMaxPak
             // 
             this.tbMaxPak.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.tbMaxPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.tbMaxPak.Location = new System.Drawing.Point(571, 593);
+            this.tbMaxPak.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbMaxPak.Location = new System.Drawing.Point(571, 591);
             this.tbMaxPak.Name = "tbMaxPak";
             this.tbMaxPak.ReadOnly = true;
-            this.tbMaxPak.Size = new System.Drawing.Size(263, 31);
+            this.tbMaxPak.Size = new System.Drawing.Size(263, 40);
             this.tbMaxPak.TabIndex = 41;
+            this.tbMaxPak.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnChange
             // 
@@ -482,8 +484,9 @@ namespace Kriterium
             // 
             // btnClearPack
             // 
+            this.btnClearPack.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btnClearPack.BackColor = System.Drawing.Color.PeachPuff;
-            this.btnClearPack.Location = new System.Drawing.Point(431, 585);
+            this.btnClearPack.Location = new System.Drawing.Point(429, 586);
             this.btnClearPack.Name = "btnClearPack";
             this.btnClearPack.Size = new System.Drawing.Size(100, 51);
             this.btnClearPack.TabIndex = 47;
@@ -587,7 +590,7 @@ namespace Kriterium
             this.MinimumSize = new System.Drawing.Size(950, 700);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Kriterium V1.3";
+            this.Text = "Kriterium V1.5";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
