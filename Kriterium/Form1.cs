@@ -76,8 +76,10 @@ namespace Kriterium
             maxPack = (double)Settings.Default["maxPack"];
             minPack = (double)Settings.Default["minPack"];
             minPack = minPack == 0 ? normVal : minPack;
-            tbMaxPak.Text = maxPack == 0 ? "" : maxPack.ToString();
-            tbMinPak.Text = minPack == normVal ? "" : minPack.ToString();
+            //tbMaxPak.Text = maxPack == 0 ? "" : maxPack.ToString();
+            //tbMinPak.Text = minPack == normVal ? "" : minPack.ToString();
+            tbMaxPak.Text = maxPack.ToString();
+            tbMinPak.Text = minPack.ToString();
         }
 
 
@@ -610,7 +612,7 @@ namespace Kriterium
             if (checkTimer())
             {
                 // save number no min
-                if (minPack > data && data <= normVal)
+                if (minPack > data)
                 {
                     minPack = data;
                     tbMinPak.Invoke((MethodInvoker)(() => tbMinPak.Text = minPack.ToString()));
@@ -618,7 +620,7 @@ namespace Kriterium
                     Settings.Default.Save();
                 }
                 // save number to max
-                if (maxPack < data && data >= normVal)
+                if (maxPack < data)
                 {
                     maxPack = data;
                     tbMaxPak.Invoke((MethodInvoker)(() => tbMaxPak.Text = maxPack.ToString()));
@@ -638,7 +640,7 @@ namespace Kriterium
             {
                 // if time is out
                 this.Invoke((MethodInvoker)(() => BackColor = Color.FromArgb(255, 240, 163)));
-                Thread.Sleep(150);
+                Thread.Sleep(220);
                 this.Invoke((MethodInvoker)(() => BackColor = Color.WhiteSmoke));
             }
             else
