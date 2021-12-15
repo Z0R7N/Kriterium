@@ -18,3 +18,13 @@ D:\Rab_stol\Kriterium\Kriterium\obj\x86\Debug\Kriterium.pdb
 D:\Rab_stol\Kriterium\Kriterium\bin\x86\Debug\Kriterium.exe.config
 D:\Rab_stol\Kriterium\Kriterium\bin\x86\Debug\Kriterium.exe
 D:\Rab_stol\Kriterium\Kriterium\bin\x86\Debug\Kriterium.pdb
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.csproj.AssemblyReference.cache
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.Form1.resources
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.Properties.Resources.resources
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.csproj.GenerateResource.cache
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.csproj.CoreCompileInputs.cache
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.exe
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.pdb
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Debug\Kriterium.exe.config
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Debug\Kriterium.exe
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Debug\Kriterium.pdb

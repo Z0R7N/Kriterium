@@ -72,7 +72,7 @@ namespace Kriterium
             this.lblNormVal = new System.Windows.Forms.Label();
             this.lblminVal = new System.Windows.Forms.Label();
             this.lblMaxVal = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnSaveVal = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -527,14 +527,17 @@ namespace Kriterium
             this.lblMaxVal.Text = "0";
             this.lblMaxVal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
+            // btnSaveVal
             // 
-            this.button1.Location = new System.Drawing.Point(657, 205);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(162, 30);
-            this.button1.TabIndex = 51;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSaveVal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(212)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.btnSaveVal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnSaveVal.Location = new System.Drawing.Point(668, 194);
+            this.btnSaveVal.Name = "btnSaveVal";
+            this.btnSaveVal.Size = new System.Drawing.Size(162, 48);
+            this.btnSaveVal.TabIndex = 51;
+            this.btnSaveVal.Text = "Сохранить";
+            this.btnSaveVal.UseVisualStyleBackColor = false;
+            this.btnSaveVal.Click += new System.EventHandler(this.btnSaveVal_Click);
             // 
             // Form1
             // 
@@ -544,7 +547,7 @@ namespace Kriterium
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CancelButton = this.btnStop;
             this.ClientSize = new System.Drawing.Size(984, 661);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnSaveVal);
             this.Controls.Add(this.lblMaxVal);
             this.Controls.Add(this.lblminVal);
             this.Controls.Add(this.lblNormVal);
@@ -643,7 +646,7 @@ namespace Kriterium
         private System.Windows.Forms.Label lblNormVal;
         private System.Windows.Forms.Label lblminVal;
         private System.Windows.Forms.Label lblMaxVal;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnSaveVal;
     }
 }
 

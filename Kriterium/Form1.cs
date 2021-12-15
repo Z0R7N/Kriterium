@@ -1,5 +1,6 @@
 ﻿using Kriterium.Properties;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO.Ports;
 using System.Text.RegularExpressions;
@@ -25,10 +26,14 @@ namespace Kriterium
         string labelValue;                    // for change data in labels value
         double variData, oldData = 0;         // value for check changing coefficient
         long oldTime, timer = 20000000;       // value for check timer and count for timer = 3 sec
+        bool changeVal = false;               // check if text changed and don't saveing
+        long timeApp = DateTime.Now.Ticks;    // time of start working application
+
 
         public Form1()
         {
             InitializeComponent();
+            Debug.WriteLine("initial = " + timeApp);
         }
 
         // take arguments or settings
@@ -243,6 +248,9 @@ namespace Kriterium
 
         private void tbMin_TextChanged(object sender, EventArgs e)
         {
+            changeVal = true;
+            timeApp = DateTime.Now.Ticks;
+            Debug.WriteLine("tb min = " + timeApp);
             labelValue = tbMin.Text;
             saveNumber(labelValue, "minValue");
             lblminVal.Text = labelValue;
@@ -251,6 +259,9 @@ namespace Kriterium
 
         private void tbNorm_TextChanged(object sender, EventArgs e)
         {
+            changeVal = true;
+            timeApp = DateTime.Now.Ticks;
+            Debug.WriteLine("tb norm = " + timeApp);
             labelValue = tbNorm.Text;
             saveNumber(labelValue, "normValue");
             lblNormVal.Text = labelValue;
@@ -259,6 +270,9 @@ namespace Kriterium
 
         private void tbMax_TextChanged(object sender, EventArgs e)
         {
+            changeVal = true;
+            timeApp = DateTime.Now.Ticks;
+            Debug.WriteLine("tb max = " + timeApp);
             labelValue = tbMax.Text;
             saveNumber(labelValue, "maxValue");
             lblMaxVal.Text = labelValue;
@@ -343,6 +357,14 @@ namespace Kriterium
             //    Console.WriteLine(exist);
             //}
             closePorts();
+            if (changeVal) saveProperties();
+        }
+
+        // save new values in shortcut properties
+        private void saveProperties()
+        {
+            changeVal = false;
+
         }
 
         private void cbVolt1_CheckedChanged(object sender, EventArgs e)
@@ -412,6 +434,12 @@ namespace Kriterium
             {
                 MessageBox.Show(ex.Message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // click on button Save values
+        private void btnSaveVal_Click(object sender, EventArgs e)
+        {
+            saveProperties();
         }
 
         // method calculating value
