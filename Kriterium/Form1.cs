@@ -363,7 +363,7 @@ namespace Kriterium
 
         private void btnClearPack_Click(object sender, EventArgs e)
         {
-            minPack = normVal;
+            minPack = maxVal;
             maxPack = 0;
             saveDouble(minPack, "minPack");
             saveDouble(maxPack, "maxPack");

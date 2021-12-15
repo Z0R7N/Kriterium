@@ -1,0 +1,9 @@
+D:\CCodePrjcts\Kriterium\Kriterium\bin\x86\Release\Kriterium.exe.config
+D:\CCodePrjcts\Kriterium\Kriterium\bin\x86\Release\Kriterium.exe
+D:\CCodePrjcts\Kriterium\Kriterium\bin\x86\Release\Kriterium.pdb
+D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.Form1.resources
+D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.Properties.Resources.resources
+D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.GenerateResource.cache
+D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.CoreCompileInputs.cache
+D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.exe
+D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.pdb
