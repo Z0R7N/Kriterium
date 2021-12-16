@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.IO.Ports;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -246,9 +247,16 @@ namespace Kriterium
             cbPort2.SelectedIndex = p1;
         }
 
+        // check time from start of app
+        private bool currenTime()
+        {
+            if (DateTime.Now.Ticks - timeApp > 6000000) return true;
+            return false;
+        }
+
         private void tbMin_TextChanged(object sender, EventArgs e)
         {
-            changeVal = true;
+            if(currenTime()) changeVal = true;
             timeApp = DateTime.Now.Ticks;
             Debug.WriteLine("tb min = " + timeApp);
             labelValue = tbMin.Text;
@@ -259,7 +267,7 @@ namespace Kriterium
 
         private void tbNorm_TextChanged(object sender, EventArgs e)
         {
-            changeVal = true;
+            if(currenTime()) changeVal = true;
             timeApp = DateTime.Now.Ticks;
             Debug.WriteLine("tb norm = " + timeApp);
             labelValue = tbNorm.Text;
@@ -270,7 +278,7 @@ namespace Kriterium
 
         private void tbMax_TextChanged(object sender, EventArgs e)
         {
-            changeVal = true;
+            if(currenTime()) changeVal = true;
             timeApp = DateTime.Now.Ticks;
             Debug.WriteLine("tb max = " + timeApp);
             labelValue = tbMax.Text;
@@ -364,7 +372,15 @@ namespace Kriterium
         private void saveProperties()
         {
             changeVal = false;
+            SaveFileDialog sfd = new SaveFileDialog();
+            if (sfd.ShowDialog() == DialogResult.OK && sfd.FileName.Length > 0)
+            {
+                using (StreamWriter sw = new StreamWriter(sfd.FileName, true)
+                {
+                    sw.WriteLine("sfdgv"); //(minVal + " " + normVal + " " + maxVal);
 
+                }
+            }
         }
 
         private void cbVolt1_CheckedChanged(object sender, EventArgs e)
