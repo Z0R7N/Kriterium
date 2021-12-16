@@ -28,3 +28,6 @@ D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.pdb
 D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Debug\Kriterium.exe.config
 D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Debug\Kriterium.exe
 D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Debug\Kriterium.pdb
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Debug\Interop.IWshRuntimeLibrary.dll
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Interop.IWshRuntimeLibrary.dll
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Debug\Kriterium.csproj.ResolveComReference.cache

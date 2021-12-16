@@ -7,3 +7,15 @@ D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.GenerateReso
 D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.CoreCompileInputs.cache
 D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.exe
 D:\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.pdb
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Release\Kriterium.exe.config
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Release\Kriterium.exe
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Release\Kriterium.pdb
+D:\code\CCodePrjcts\Kriterium\Kriterium\bin\x86\Release\Interop.IWshRuntimeLibrary.dll
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Interop.IWshRuntimeLibrary.dll
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.ResolveComReference.cache
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.Form1.resources
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.Properties.Resources.resources
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.GenerateResource.cache
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.CoreCompileInputs.cache
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.exe
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.pdb

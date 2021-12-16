@@ -1,4 +1,5 @@
-﻿using Kriterium.Properties;
+﻿using IWshRuntimeLibrary;
+using Kriterium.Properties;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -256,7 +257,7 @@ namespace Kriterium
 
         private void tbMin_TextChanged(object sender, EventArgs e)
         {
-            if(currenTime()) changeVal = true;
+            if (currenTime()) changeVal = true;
             timeApp = DateTime.Now.Ticks;
             Debug.WriteLine("tb min = " + timeApp);
             labelValue = tbMin.Text;
@@ -267,7 +268,7 @@ namespace Kriterium
 
         private void tbNorm_TextChanged(object sender, EventArgs e)
         {
-            if(currenTime()) changeVal = true;
+            if (currenTime()) changeVal = true;
             timeApp = DateTime.Now.Ticks;
             Debug.WriteLine("tb norm = " + timeApp);
             labelValue = tbNorm.Text;
@@ -278,7 +279,7 @@ namespace Kriterium
 
         private void tbMax_TextChanged(object sender, EventArgs e)
         {
-            if(currenTime()) changeVal = true;
+            if (currenTime()) changeVal = true;
             timeApp = DateTime.Now.Ticks;
             Debug.WriteLine("tb max = " + timeApp);
             labelValue = tbMax.Text;
@@ -375,11 +376,12 @@ namespace Kriterium
             SaveFileDialog sfd = new SaveFileDialog();
             if (sfd.ShowDialog() == DialogResult.OK && sfd.FileName.Length > 0)
             {
-                using (StreamWriter sw = new StreamWriter(sfd.FileName, true)
-                {
-                    sw.WriteLine("sfdgv"); //(minVal + " " + normVal + " " + maxVal);
-
-                }
+                WshShell shell = new WshShell();
+                IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(sfd.FileName + ".lnk");
+                shortcut.Arguments = " " + minVal + " " + normVal + " " + maxVal;
+                shortcut.TargetPath = Environment.CurrentDirectory + @"\Kriterium.exe";
+                shortcut.WorkingDirectory = Environment.CurrentDirectory;
+                shortcut.Save();
             }
         }
 
