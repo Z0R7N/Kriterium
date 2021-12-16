@@ -19,3 +19,4 @@ D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.Generat
 D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.CoreCompileInputs.cache
 D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.exe
 D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.pdb
+D:\code\CCodePrjcts\Kriterium\Kriterium\obj\x86\Release\Kriterium.csproj.AssemblyReference.cache

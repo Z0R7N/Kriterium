@@ -28,14 +28,14 @@ namespace Kriterium
         string labelValue;                    // for change data in labels value
         double variData, oldData = 0;         // value for check changing coefficient
         long oldTime, timer = 20000000;       // value for check timer and count for timer = 3 sec
-        bool changeVal = false;               // check if text changed and don't saveing
-        long timeApp = DateTime.Now.Ticks;    // time of start working application
+        //bool changeVal = false;               // check if text changed and don't saveing
+        //long timeApp = DateTime.Now.Ticks;    // time of start working application
 
 
         public Form1()
         {
             InitializeComponent();
-            Debug.WriteLine("initial = " + timeApp);
+            //Debug.WriteLine("initial = " + timeApp);
         }
 
         // take arguments or settings
@@ -249,17 +249,17 @@ namespace Kriterium
         }
 
         // check time from start of app
-        private bool currenTime()
-        {
-            if (DateTime.Now.Ticks - timeApp > 6000000) return true;
-            return false;
-        }
+        //private bool currenTime()
+        //{
+        //    if (DateTime.Now.Ticks - timeApp > 6000000) return true;
+        //    return false;
+        //}
 
         private void tbMin_TextChanged(object sender, EventArgs e)
         {
-            if (currenTime()) changeVal = true;
-            timeApp = DateTime.Now.Ticks;
-            Debug.WriteLine("tb min = " + timeApp);
+            //if (currenTime()) changeVal = true;
+            //timeApp = DateTime.Now.Ticks;
+            //Debug.WriteLine("tb min = " + timeApp);
             labelValue = tbMin.Text;
             saveNumber(labelValue, "minValue");
             lblminVal.Text = labelValue;
@@ -268,9 +268,9 @@ namespace Kriterium
 
         private void tbNorm_TextChanged(object sender, EventArgs e)
         {
-            if (currenTime()) changeVal = true;
-            timeApp = DateTime.Now.Ticks;
-            Debug.WriteLine("tb norm = " + timeApp);
+            //if (currenTime()) changeVal = true;
+            //timeApp = DateTime.Now.Ticks;
+            //Debug.WriteLine("tb norm = " + timeApp);
             labelValue = tbNorm.Text;
             saveNumber(labelValue, "normValue");
             lblNormVal.Text = labelValue;
@@ -279,9 +279,9 @@ namespace Kriterium
 
         private void tbMax_TextChanged(object sender, EventArgs e)
         {
-            if (currenTime()) changeVal = true;
-            timeApp = DateTime.Now.Ticks;
-            Debug.WriteLine("tb max = " + timeApp);
+            //if (currenTime()) changeVal = true;
+            //timeApp = DateTime.Now.Ticks;
+            //Debug.WriteLine("tb max = " + timeApp);
             labelValue = tbMax.Text;
             saveNumber(labelValue, "maxValue");
             lblMaxVal.Text = labelValue;
@@ -366,21 +366,22 @@ namespace Kriterium
             //    Console.WriteLine(exist);
             //}
             closePorts();
-            if (changeVal) saveProperties();
         }
 
         // save new values in shortcut properties
         private void saveProperties()
         {
-            changeVal = false;
+            //changeVal = false;
             SaveFileDialog sfd = new SaveFileDialog();
             if (sfd.ShowDialog() == DialogResult.OK && sfd.FileName.Length > 0)
             {
                 WshShell shell = new WshShell();
                 IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(sfd.FileName + ".lnk");
                 shortcut.Arguments = " " + minVal + " " + normVal + " " + maxVal;
-                shortcut.TargetPath = Environment.CurrentDirectory + @"\Kriterium.exe";
-                shortcut.WorkingDirectory = Environment.CurrentDirectory;
+                shortcut.TargetPath = Directory.GetCurrentDirectory() + @"\Kriterium.exe";
+                    //@"C:\KT\Kriterium.exe"; 
+                    //Environment.CurrentDirectory + @"\Kriterium.exe";
+                shortcut.WorkingDirectory = Directory.GetCurrentDirectory();
                 shortcut.Save();
             }
         }
