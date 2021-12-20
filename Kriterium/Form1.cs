@@ -378,10 +378,8 @@ namespace Kriterium
                 WshShell shell = new WshShell();
                 IWshShortcut shortcut = (IWshShortcut)shell.CreateShortcut(sfd.FileName + ".lnk");
                 shortcut.Arguments = " " + minVal + " " + normVal + " " + maxVal;
-                shortcut.TargetPath = Directory.GetCurrentDirectory() + @"\Kriterium.exe";
-                    //@"C:\KT\Kriterium.exe"; 
-                    //Environment.CurrentDirectory + @"\Kriterium.exe";
-                shortcut.WorkingDirectory = Directory.GetCurrentDirectory();
+                shortcut.TargetPath = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + @"\Kriterium.exe";
+                shortcut.WorkingDirectory = System.IO.Path.GetDirectoryName(Application.ExecutablePath);
                 shortcut.Save();
             }
         }
