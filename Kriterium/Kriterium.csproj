@@ -103,6 +103,7 @@
     <None Include="assets\triangleRed.png" />
     <None Include="assets\triangleBlack.png" />
     <None Include="assets\arrowChange.png" />
+    <Content Include="bugs.txt" />
     <Content Include="iconKT.ico" />
     <Content Include="krit.ico" />
     <None Include="Resources\arrowRed.png" />

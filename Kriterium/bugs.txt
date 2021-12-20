@@ -1,0 +1,21 @@
+﻿на Win XP не создается ярлык с рабочим путем к программе
+объект
+"C:\Documents and Settings\Администратор\Рабочий стол\Трансформатор\Kriterium.exe"  0 1 0
+рабочая папка
+"C:\Documents and Settings\Администратор\Рабочий стол\Трансформатор"
+
+
+должно быть 
+"C:\KT\Kriterium.exe"  0 1 0
+"C:\KT"
+
+есть несколько способов получить путь к папке приложения:
+
+Application.StartupPath
+System.IO.Path.GetDirectoryName( System.Reflection.Assembly.GetExecutingAssembly().Location)
+AppDomain.CurrentDomain.BaseDirectory
+System.IO.Directory.GetCurrentDirectory()
+Environment.CurrentDirectory
+System.IO.Path.GetDirectoryName( System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase)
+System.IO.Path.GetDirectory(Application.ExecutablePath)
+System.Reflection.Assembly.GetExecutingAssembly().Location
